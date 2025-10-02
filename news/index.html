@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Научный блог - ScienceDevice</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header class="header sticky">
+        <nav class="nav container">
+            <a href="/" class="logo">
+                <img src="/images/logo.png" alt="ScienceDevice" class="logo-image" />
+            </a>
+            <div class="header__actions">
+                <a href="/" class="btn btn--outline">На главную</a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="publications-news">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">Научный блог</span>
+                    <h2>Все публикации</h2>
+                    <p>
+                        Актуальные работы, новости и исследования от команды ScienceDevice.
+                    </p>
+                </div>
+                <div class="news-filters">
+                    <!-- Кнопки-фильтры будут вставлены сюда -->
+                </div>
+                <div id="news-list-container" class="news-grid">
+                    <!-- Список новостей будет загружен сюда -->
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© БИОТЕХКОНВЕРСИЯ. Все права защищены.</p>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const newsContainer = document.getElementById('news-list-container');
+            const filterContainer = document.querySelector('.news-filters');
+            
+            try {
+                const response = await fetch('/news.json');
+                const newsList = await response.json();
+                const primaryTags = [...new Set(newsList.map(item => item.primary_tag))];
+
+                // Создаем кнопки-фильтры
+                let filterButtonsHTML = '<button class="filter-chip active" data-filter="all">Все</button>';
+                primaryTags.forEach(tag => {
+                    if(tag) filterButtonsHTML += `<button class="filter-chip" data-filter="${tag}">${tag}</button>`;
+                });
+                filterContainer.innerHTML = filterButtonsHTML;
+
+                // Функция для отображения новостей
+                const displayNews = (filter) => {
+                    newsContainer.innerHTML = '';
+                    const filteredList = (filter === 'all') 
+                        ? newsList 
+                        : newsList.filter(item => item.primary_tag === filter);
+
+                    if (filteredList.length === 0) {
+                        newsContainer.innerHTML = '<p>Новостей в этой категории пока нет.</p>';
+                        return;
+                    }
+
+                    filteredList.forEach(news => {
+                        const newsCard = document.createElement('article');
+                        newsCard.className = 'news-card';
+                        
+                        const date = new Date(news.date);
+                        const formattedDate = date.toLocaleDateString('ru-RU', {
+                            year: 'numeric', month: 'long', day: 'numeric'
+                        });
+
+                        let imageHTML = news.image ? `<img src="/uploads/${news.image}" alt="${news.title}" class="news-card__image">` : '';
+
+                        // Динамическая категория
+                        const primaryTag = news.primary_tag || 'Наука';
+                        const tagClass = {
+                            'Экология': 'ecology',
+                            'Химия': 'chemistry',
+                            'Образование': 'education',
+                            'Промышленность': 'industry'
+                        }[primaryTag] || 'science';
+
+
+                        newsCard.innerHTML = `
+                            <a href="/news/${news.slug}/" class="news-card__link">
+                                ${imageHTML}
+                                <div class="news-card__content-wrapper">
+                                    <div class="news-card__header">
+                                        <span class="news-badge ${tagClass}">${primaryTag}</span>
+                                        <time class="news-date" datetime="${news.date}">${formattedDate}</time>
+                                    </div>
+                                    <div class="news-card__content">
+                                        <h3 class="news-title">${news.title}</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        `;
+                        newsContainer.appendChild(newsCard);
+                    });
+                };
+
+                // Навешиваем обработчики на кнопки
+                filterContainer.addEventListener('click', (e) => {
+                    if (e.target.tagName === 'BUTTON') {
+                        filterContainer.querySelector('.active').classList.remove('active');
+                        e.target.classList.add('active');
+                        displayNews(e.target.dataset.filter);
+                    }
+                });
+
+                // Первоначальное отображение
+                displayNews('all');
+
+            } catch (error) {
+                console.error('Ошибка:', error);
+                newsContainer.innerHTML = '<p>Не удалось загрузить новости.</p>';
+            }
+        });
+    </script>
+</body>
+</html>

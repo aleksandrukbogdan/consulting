@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Новости{% endblock %}
+
+{% block body_class %}news-list-page{% endblock %}
+
+{% block content %}
+<section class="news-list-section">
+    <div class="container">
+        <div class="section-header centered">
+            <div class="section-header__text">
+                <span class="section-badge">Научный блог</span>
+                <h1>Все публикации</h1>
+                <p>
+                    Актуальные работы с использованием анализаторов ScienceDevice в
+                    мировых научных изданиях
+                </p>
+            </div>
+        </div>
+
+        <div class="news-filters">
+            <button class="filter-chip active" data-filter="all">
+                <span class="material-symbols-outlined">done</span>
+                Все
+            </button>
+            <button class="filter-chip" data-filter="Экология"><span class="material-symbols-outlined">done</span>Экология</button>
+            <button class="filter-chip" data-filter="Химия"><span class="material-symbols-outlined">done</span>Химия</button>
+            <button class="filter-chip" data-filter="Образование">
+                <span class="material-symbols-outlined">done</span>Образование
+            </button>
+            <button class="filter-chip" data-filter="Промышленность">
+                <span class="material-symbols-outlined">done</span>Промышленность
+            </button>
+        </div>
+
+        <div id="news-container" class="news-grid">
+            <!-- Новости будут загружены сюда динамически -->
+        </div>
+    </div>
+</section>
+{% endblock %}

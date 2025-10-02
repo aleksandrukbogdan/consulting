@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель</title>
+    <style>
+        body { font-family: sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; line-height: 1.6; font-size: 16px; color: #333; background-color: #f9f9f9; }
+        .container { background: #fff; border: 1px solid #ddd; padding: 20px; border-radius: 5px; }
+        h1, h2 { color: #333; }
+        form { margin-bottom: 20px; }
+        input[type="text"], input[type="password"], textarea {
+            width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;
+        }
+        textarea { height: 200px; resize: vertical; }
+        button { background-color: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+        .error { color: red; }
+        .logout { float: right; }
+        .news-item { border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 10px; }
+        .news-item:last-child { border-bottom: none; }
+        .news-item h3 { margin-top: 0; }
+        .news-item small { color: #777; }
+        .news-item .delete-link { color: #d9534f; text-decoration: none; }
+        .news-item .delete-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Админ-панель</h1>
+
+        {% if session.loggedin %}
+            <a class="logout" href="{{ url_for('logout') }}">Выйти</a>
+            <h2>Добавить новость</h2>
+            <form action="{{ url_for('admin') }}" method="post" enctype="multipart/form-data">
+                <input type="text" id="title" name="title" placeholder="Заголовок" required><br>
+                
+                <label for="primary_tag">Основная категория:</label>
+                <select name="primary_tag" id="primary_tag" required>
+                    {% for tag in primary_tags %}
+                        <option value="{{ tag }}">{{ tag }}</option>
+                    {% endfor %}
+                </select><br><br>
+
+                <input type="text" id="slug" name="slug" placeholder="URL (сгенерируется автоматически)"><br>
+
+                <textarea name="content" placeholder="Текст новости" required></textarea><br>
+                <input type="text" name="tags" placeholder="Дополнительные теги (через запятую)"><br>
+                
+                <label for="image">Изображение (jpg, png, gif):</label>
+                <input type="file" name="image" accept="image/png, image/jpeg, image/gif"><br><br>
+                
+                <label for="document">Документ (pdf, doc, txt):</label>
+                <input type="file" name="document" accept=".pdf,.doc,.docx,.txt"><br><br>
+                
+                <button type="submit">Добавить новость</button>
+            </form>
+
+            <script>
+                // Простое авто-создание слага для удобства
+                document.getElementById('title').addEventListener('input', function(e) {
+                    // Эта функция не будет идеальной для кириллицы без библиотеки,
+                    // но даст представление. Основная магия - на сервере.
+                    const title = e.target.value;
+                    const slug = title.toString().toLowerCase()
+                        .replace(/\s+/g, '-')       // Заменяем пробелы на -
+                        .replace(/[^\w\-]+/g, '')   // Удаляем все не-буквенно-цифровые символы
+                        .replace(/\-\-+/g, '-')     // Заменяем несколько - на один
+                        .replace(/^-+/, '')         // Убираем - в начале
+                        .replace(/-+$/, '');        // Убираем - в конце
+                    document.getElementById('slug').placeholder = `URL: ${slug}`;
+                });
+            </script>
+
+            <h2>Существующие новости</h2>
+            <div id="news-list">
+                {% if news_list %}
+                    {% for news in news_list %}
+                    <div class="news-item">
+                        <h3>{{ news.title }}</h3>
+                        <small>Дата: {{ news.date }}</small>
+                        {% if news.image %}
+                            <p><img src="{{ url_for('uploaded_file', filename=news.image) }}" alt="" width="200"></p>
+                        {% endif %}
+                        <div>{{ news.content | safe }}</div>
+                        <p><strong>Теги:</strong> {{ news.tags | join(', ') }}</p>
+                        {% if news.document %}
+                            <p><a href="{{ url_for('uploaded_file', filename=news.document) }}">Скачать документ</a></p>
+                        {% endif %}
+                        <p><a href="{{ url_for('delete_news', news_id=news.id) }}"
+                              class="delete-link"
+                              onclick="return confirm('Вы уверены, что хотите удалить эту новость?');">Удалить</a></p>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p>Новостей пока нет.</p>
+                {% endif %}
+            </div>
+
+        {% else %}
+            <h2>Вход</h2>
+            <form action="{{ url_for('admin') }}" method="post">
+                <input type="password" name="password" placeholder="Пароль" required>
+                <button type="submit">Войти</button>
+            </form>
+            {% if login_error %}
+                <p class="error">{{ login_error }}</p>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>

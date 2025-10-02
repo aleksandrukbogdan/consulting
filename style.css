@@ -1,0 +1,1843 @@
+/* 
+ * ScienceDevice Material 3 Redesign
+ * CSS Variables and Base Styles
+ */
+
+:root {
+  /* Light Theme Color Palette */
+  --md-sys-color-primary: #2D461A;
+  --md-sys-color-on-primary: #FFFFFF;
+  --md-sys-color-primary-container: #445E2F;
+  --md-sys-color-on-primary-container: #B7D69B;
+  --md-sys-color-secondary: #57624B;
+  --md-sys-color-on-secondary: #FFFFFF;
+  --md-sys-color-secondary-container: #DAE7CA;
+  --md-sys-color-on-secondary-container: #151E0C;
+  --md-sys-color-tertiary: #00483C;
+  --md-sys-color-on-tertiary: #FFFFFF;
+  --md-sys-color-tertiary-container: #1C6153;
+  --md-sys-color-on-tertiary-container: #98D9C8;
+  --md-sys-color-error: #BA1A1A;
+  --md-sys-color-on-error: #FFFFFF;
+  --md-sys-color-error-container: #FFDAD6;
+  --md-sys-color-on-error-container: #410002;
+  --md-sys-color-background: #FAFAF2;
+  --md-sys-color-on-background: #1A1C18;
+  --md-sys-color-surface: #FAFAF2;
+  --md-sys-color-on-surface: #1A1C18;
+  --md-sys-color-surface-variant: #E0E4D6;
+  --md-sys-color-on-surface-variant: #44483E;
+  --md-sys-color-outline: #74796D;
+  --md-sys-color-outline-variant: #C4C8BB;
+  --md-sys-color-shadow: #000000;
+  --md-sys-color-scrim: #000000;
+  --md-sys-color-inverse-surface: #2F312C;
+  --md-sys-color-inverse-on-surface: #F1F1EA;
+  --md-sys-color-inverse-primary: #B1D096;
+  --md-sys-color-surface-dim: #DBDAD3;
+  --md-sys-color-surface-bright: #FAFAF2;
+  --md-sys-color-surface-container-lowest: #FFFFFF;
+  --md-sys-color-surface-container-low: #F4F4ED;
+  --md-sys-color-surface-container: #EFEEE7;
+  --md-sys-color-surface-container-high: #E9E8E1;
+  --md-sys-color-surface-container-highest: #E3E3DC;
+}
+
+body.dark-theme {
+    /* Dark Theme Color Palette */
+    --md-sys-color-primary: #B1D096;
+    --md-sys-color-on-primary: #1F360C;
+    --md-sys-color-primary-container: #445E2F;
+    --md-sys-color-on-primary-container: #B7D69B;
+    --md-sys-color-secondary: #BECBAF;
+    --md-sys-color-on-secondary: #293420;
+    --md-sys-color-secondary-container: #404A35;
+    --md-sys-color-on-secondary-container: #DAE7CA;
+    --md-sys-color-tertiary: #92D3C2;
+    --md-sys-color-on-tertiary: #00382E;
+    --md-sys-color-tertiary-container: #1C6153;
+    --md-sys-color-on-tertiary-container: #98D9C8;
+    --md-sys-color-error: #FFB4AB;
+    --md-sys-color-on-error: #690005;
+    --md-sys-color-error-container: #93000A;
+    --md-sys-color-on-error-container: #FFDAD6;
+    --md-sys-color-background: #121410;
+    --md-sys-color-on-background: #E3E3DC;
+    --md-sys-color-surface: #121410;
+    --md-sys-color-on-surface: #E3E3DC;
+    --md-sys-color-surface-variant: #44483E;
+    --md-sys-color-on-surface-variant: #C4C8BB;
+    --md-sys-color-outline: #8E9286;
+    --md-sys-color-outline-variant: #44483E;
+    --md-sys-color-shadow: #000000;
+    --md-sys-color-scrim: #000000;
+    --md-sys-color-inverse-surface: #E3E3DC;
+    --md-sys-color-inverse-on-surface: #2F312C;
+    --md-sys-color-inverse-primary: #4B6636;
+    --md-sys-color-surface-dim: #121410;
+    --md-sys-color-surface-bright: #383A35;
+    --md-sys-color-surface-container-lowest: #0D0F0B;
+    --md-sys-color-surface-container-low: #1A1C18;
+    --md-sys-color-surface-container: #1F201C;
+    --md-sys-color-surface-container-high: #292B26;
+    --md-sys-color-surface-container-highest: #343630;
+}
+
+/* 
+ * Base Styles & Resets
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--md-sys-color-background);
+  color: var(--md-sys-color-on-surface);
+  font-family: 'Manrope', sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+  color: var(--md-sys-color-on-surface);
+}
+
+/* Material 3 Type Scale (Simplified) */
+h1, .display-large {
+  font-size: 3.5625rem; /* 57px */
+  line-height: 4rem;
+  letter-spacing: -0.015625rem;
+}
+
+h2, .headline-large {
+  font-size: 2rem; /* 32px */
+  line-height: 2.5rem;
+}
+
+h3, .title-large {
+  font-size: 1.375rem; /* 22px */
+  line-height: 1.75rem;
+}
+
+.display-small {
+  font-size: 2.25rem; /* 36px */
+  line-height: 2.75rem;
+}
+
+.headline-small {
+  font-size: 1.5rem; /* 24px */
+  line-height: 2rem;
+}
+
+.headline-medium {
+    font-size: 1.75rem; /* 28px */
+    line-height: 2.25rem;
+}
+
+.title-medium {
+    font-size: 1rem; /* 16px */
+    line-height: 1.5rem;
+    font-weight: 600;
+}
+
+.body-medium {
+    font-size: 0.875rem; /* 14px */
+    line-height: 1.25rem;
+}
+
+p, .body-large {
+  font-size: 1rem; /* 16px */
+  line-height: 1.5rem;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.label-large {
+    font-size: 0.875rem; /* 14px */
+    line-height: 1.25rem;
+    font-weight: 600;
+}
+
+a {
+  color: var(--md-sys-color-primary);
+  text-decoration: none;
+}
+
+/* Layout */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1rem;
+}
+
+section {
+    padding: 4rem 0;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-badge {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* 
+ * Header (M3 Top App Bar)
+ */
+.header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 72px; /* Increased height */
+    background-color: var(--md-sys-color-surface);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.header.scrolled {
+    background-color: var(--md-sys-color-surface-container);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo-image {
+    height: 40px;
+    width: auto;
+    display: block;
+}
+
+.nav__menu {
+    display: block;
+}
+
+.nav__list {
+    display: flex;
+    list-style: none;
+    gap: 0.5rem; /* 8px */
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem; /* 12px 16px */
+    border-radius: 20px;
+    font-size: 0.875rem; /* Label Large */
+    font-weight: 600;
+    color: var(--md-sys-color-on-surface-variant);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-link:hover, .nav-link.active {
+    background-color: var(--md-sys-color-secondary-container);
+    color: var(--md-sys-color-on-secondary-container);
+}
+
+.nav-item--dropdown {
+    position: relative;
+}
+
+.nav-item--dropdown .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--md-sys-color-surface-container);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    list-style: none;
+    padding: 0.5rem;
+    min-width: 240px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    z-index: 1001;
+}
+
+.nav-item--dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: var(--md-sys-color-on-surface-variant);
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.dropdown-menu a:hover {
+    background-color: var(--md-sys-color-surface-container-high);
+    color: var(--md-sys-color-on-surface);
+}
+
+.header__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--md-sys-color-on-surface-variant);
+    transition: background-color 0.3s;
+}
+
+.icon-btn:hover {
+    background-color: rgba(0,0,0,0.08);
+}
+
+.nav__close,
+.nav__toggle {
+    display: none; /* Hidden on desktop */
+}
+
+/* 
+ * Hero Section 
+ */
+.hero {
+    position: relative;
+    min-height: auto;
+    padding: 6rem 0;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.hero__content {
+    position: relative;
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.hero__content h1 {
+    color: var(--md-sys-color-on-surface);
+    font-size: 3.5rem; /* Increased font size */
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.hero__content p {
+    color: var(--md-sys-color-on-surface-variant);
+    margin: 0 0 2.5rem 0; /* 40dp margin */
+}
+
+.hero__buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem; /* 16dp gap */
+    flex-wrap: wrap;
+}
+
+/* 
+ * M3 Buttons
+ */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 24px;
+    height: 40px;
+    border-radius: 20px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Filled Button (Primary) */
+.btn--primary {
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+}
+
+.btn--primary:hover {
+    box-shadow: 0 2px 4px -1px rgba(0,0,0,0.2), 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12);
+}
+
+/* Tonal Button (Secondary) */
+.btn--secondary {
+    background-color: var(--md-sys-color-secondary-container);
+    color: var(--md-sys-color-on-secondary-container);
+}
+
+.btn--secondary:hover {
+    box-shadow: 0 2px 4px -1px rgba(0,0,0,0.2), 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12);
+}
+
+/* Outlined Button */
+.btn--outline {
+    background-color: transparent;
+    color: var(--md-sys-color-primary);
+    border: 1px solid var(--md-sys-color-outline);
+}
+
+.btn--outline:hover {
+    background-color: rgba(var(--md-sys-color-primary-rgb, 45, 70, 26), 0.08); /* Needs RGB version */
+}
+
+/* Text Button */
+.btn--text {
+    background-color: transparent;
+    color: var(--md-sys-color-primary);
+}
+
+.btn--text:hover {
+    background-color: rgba(var(--md-sys-color-primary-rgb, 45, 70, 26), 0.08); /* Needs RGB version */
+}
+
+/* Elevated Button */
+.btn--elevated {
+    background-color: var(--md-sys-color-surface-container);
+    color: var(--md-sys-color-primary);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn--elevated:hover {
+    box-shadow: 0 2px 4px -1px rgba(0,0,0,0.2), 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12);
+}
+
+/* 
+ * Solutions Section
+ */
+.solutions-section {
+    background-color: var(--md-sys-color-surface);
+}
+
+.solutions-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.solutions-layout__header {
+    grid-column: 1 / 2;
+    align-self: end;
+    padding-bottom: 24px; /* To align with card padding */
+}
+
+.solutions-layout__card-left {
+    grid-column: 1 / 2;
+    grid-row: 2 / 4;
+}
+
+.solutions-layout__card-right {
+    grid-column: 2 / 3;
+    grid-row: 1 / 3;
+}
+
+.solutions-layout__partners {
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+}
+
+.solution-card {
+    background-color: var(--md-sys-color-surface-container); /* Lighter surface */
+    border-radius: 24px;
+    padding: 24px; /* Increased padding */
+    height: 100%;
+}
+
+.solution-card h3 {
+    color: var(--md-sys-color-on-surface);
+    margin-bottom: 1.5rem;
+}
+
+/* Override for feature icons in card */
+.feature-icon {
+    font-size: 24px; /* Ensure icon size is consistent */
+    line-height: 1;
+}
+
+/* Override for university list checkmarks */
+.scientific-list li {
+    color: var(--md-sys-color-on-surface-variant); /* Secondary text color */
+}
+.scientific-list li::before {
+    color: var(--md-sys-color-primary);
+}
+
+.university-partners {
+    background-color: var(--md-sys-color-background);
+    padding: 24px;
+    border-radius: 12px;
+}
+
+.partners-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.university-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 16px;
+    height: 32px;
+    border-radius: 8px; /* Refined border-radius */
+    background-color: var(--md-sys-color-secondary-container);
+    color: var(--md-sys-color-on-secondary-container);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+
+/* 
+ * Professionals Section (Scientific Equipment)
+ */
+
+
+.professionals-section .section-header .advantages-chips {
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.professionals-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1.5rem; /* 24px */
+}
+
+.research-card, .panel-cta {
+    background-color: var(--md-sys-color-surface-container);
+    border-radius: 24px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.research-card:hover, .panel-cta:hover {
+    background-color: var(--md-sys-color-surface-container-high);
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.research-card .material-symbols-outlined {
+    font-size: 48px;
+    color: var(--md-sys-color-primary);
+    margin-bottom: 1rem;
+}
+
+.research-card h3 {
+    color: var(--md-sys-color-on-surface);
+    margin-bottom: 0.5rem;
+}
+
+.research-card p {
+    margin-top: auto;
+}
+
+/* Grid placement */
+.card-eco {
+    grid-column: 1 / 4;
+}
+.card-agro {
+    grid-column: 4 / 7;
+}
+.card-hydro {
+    grid-column: 1 / 3;
+}
+.card-quality {
+    grid-column: 3 / 5;
+}
+.card-cta {
+    grid-column: 5 / 7;
+    grid-row: 2 / 4; /* Make it taller */
+    text-align: left;
+    justify-content: space-between;
+    padding: 2rem;
+}
+
+
+.advantages-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.advantage-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--md-sys-color-outline);
+    background-color: var(--md-sys-color-surface-container-high);
+    color: var(--md-sys-color-on-surface-variant);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.panel-cta {
+    background-color: var(--md-sys-color-surface-container-high);
+}
+
+.panel-cta p {
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.panel-cta .btn--primary {
+    display: inline-flex;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+/* 
+ * Interactive Datasheet (Specs Section)
+ */
+.specs-section {
+    background-color: var(--md-sys-color-surface);
+}
+
+.specs-accordion {
+    background-color: var(--md-sys-color-surface-container);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.expansion-panel {
+    transition: background-color 0.3s ease;
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.expansion-panel:last-child {
+    border-bottom: none;
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.panel-header:hover {
+    background-color: rgba(var(--md-sys-color-on-surface-rgb, 26, 28, 24), 0.08); /* State Layer */
+}
+
+.panel-header-text {
+    flex-grow: 1;
+}
+
+.panel-title {
+    color: var(--md-sys-color-on-surface);
+}
+
+.panel-subtitle {
+    color: var(--md-sys-color-on-surface-variant);
+    margin-top: 4px;
+}
+
+.panel-header .material-symbols-outlined {
+    margin-right: 1.5rem;
+    color: var(--md-sys-color-primary);
+}
+
+.panel-chevron {
+    margin-left: 1rem;
+    margin-right: 0 !important; /* Override margin */
+    transition: transform 0.3s ease;
+}
+
+.panel-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out, padding 0.5s ease;
+    padding: 0 1.5rem;
+}
+
+.panel-content table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.panel-content th, .panel-content td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.panel-content tr:last-child td {
+    border-bottom: none;
+}
+
+.panel-content td:first-child {
+    font-weight: 600;
+    color: var(--md-sys-color-on-surface);
+}
+
+/* Active state for panel */
+.expansion-panel.active {
+    background-color: var(--md-sys-color-surface-container-highest);
+}
+
+.expansion-panel.active .panel-chevron {
+    transform: rotate(180deg);
+}
+
+.expansion-panel.active .panel-content {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+    max-height: 500px; /* Adjust as needed for content */
+}
+
+/* Staggered animation class */
+
+
+/* 
+ * Audience Sections
+ */
+.audience-section {
+    padding: 4rem 0;
+}
+
+#students, #universities {
+    background-color: var(--md-sys-color-surface-container);
+}
+
+.features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+}
+
+.feature-icon {
+    font-size: 1.5rem;
+
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.feature-text h4 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 1.125rem;
+    margin-bottom: 0.5rem;
+    color: var(--md-sys-color-on-surface);
+}
+
+.feature-text p {
+    color: var(--md-sys-color-on-surface-variant); /* Secondary text color */
+    line-height: 1.6; /* Improved line height */
+}
+
+.scientific-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.scientific-list li {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+.scientific-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--md-sys-color-primary);
+    font-weight: 600;
+}
+
+.partners-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.partner-logo {
+    padding: 1rem;
+    background-color: var(--md-sys-color-surface-container-high);
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+
+/* 
+ * Technical Specs Table
+ */
+.specs {
+    background-color: var(--md-sys-color-surface-container);
+}
+.specs-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    background-color: var(--md-sys-color-surface);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.specs-table th, .specs-table td {
+    padding: 1rem 1.5rem;
+    text-align: left;
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.specs-table thead th, .specs-table tr:first-child th {
+    background-color: var(--md-sys-color-surface-container-high);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+.specs-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.specs-table tbody td:first-child {
+    font-weight: 600;
+    color: var(--md-sys-color-on-surface);
+}
+
+/* 
+ * Research / Blog Section (M3 Cards & Chips)
+ */
+.publications-news {
+    background-color: var(--md-sys-color-surface);
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.news-card {
+    background-color: var(--md-sys-color-surface-container);
+    border-radius: 16px; /* Increased border radius */
+    border: none; /* Removed border for Filled Card style */
+    padding: 1.5rem; /* 24px */
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    transform-origin: center;
+}
+
+.news-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 3px 6px rgba(0,0,0,0.1);
+}
+
+.news-card__image {
+  width: 100%;
+  height: 200px; /* Фиксированная высота для изображения */
+  object-fit: cover; /* Масштабирует изображение, сохраняя пропорции */
+  object-position: center; /* Центрирует изображение */
+  display: block;
+  border-radius: 16px; /* Скругляем углы */
+  margin: 0 0 16px; /* Добавляем отступ снизу */
+  padding: 8px;
+}
+
+.news-card__content-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+    flex-grow: 1; /* Позволяет этому блоку занять все доступное пространство */
+}
+
+.news-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.news-badge {
+    padding: 0.4rem 1rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    background-color: var(--md-sys-color-tertiary-container);
+    color: var(--md-sys-color-on-tertiary-container);
+}
+
+.news-card__content {
+    margin-bottom: 16px;
+}
+
+.news-title {
+    font-size: 1.5rem; /* Headline Small */
+    margin-bottom: 0.5rem;
+}
+
+.news-authors {
+    margin-bottom: 1rem;
+    font-size: 1rem; /* Title Medium */
+}
+
+.news-excerpt {
+    font-size: 0.875rem; /* Body Medium */
+    color: var(--md-sys-color-on-surface-variant);
+    margin-bottom: 1rem;
+}
+
+.journal-name {
+    font-style: italic;
+    font-size: 0.875rem; /* Label Large */
+}
+
+.news-card__footer {
+    margin-top: auto; /* Прижимает футер к низу карточки */
+    border-top: 1px solid var(--md-sys-color-outline-variant); /* Divider */
+}
+
+/* M3 Filter Chips */
+.news-filters {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.filter-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 16px;
+    height: 32px;
+    border-radius: 8px;
+    border: 1px solid var(--md-sys-color-outline-variant); /* Outline Variant for inactive */
+    background-color: transparent;
+    color: var(--md-sys-color-on-surface-variant);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-chip .material-symbols-outlined {
+    font-size: 18px;
+    display: none;
+}
+
+.filter-chip:hover {
+    background-color: var(--md-sys-color-surface-container-high);
+}
+
+.filter-chip.active {
+    background-color: var(--md-sys-color-secondary-container);
+    color: var(--md-sys-color-on-secondary-container);
+    border-color: transparent;
+}
+
+.filter-chip.active .material-symbols-outlined {
+    display: inline-block;
+}
+
+/* M3 Assist Chips */
+.news-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem; /* Increased margin */
+}
+
+.news-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 12px;
+    height: 28px;
+    border-radius: 8px;
+    border: none; /* Removed border */
+    background-color: var(--md-sys-color-surface-container-highest); /* Subtle background */
+    color: var(--md-sys-color-on-surface-variant);
+    font-size: 0.75rem;
+}
+
+/* M3 Text Buttons in Card */
+.news-actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+}
+
+.news-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center; /* Center icon and text */
+    gap: 8px;
+    width: 48px; /* Touch target */
+    height: 48px; /* Touch target */
+    border-radius: 50%; /* Circular shape for icon button */
+    background-color: transparent;
+    color: var(--md-sys-color-primary);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.news-link:hover {
+    background-color: var(--md-sys-color-surface-container-highest);
+}
+
+.news-link .material-symbols-outlined {
+    font-size: 20px;
+}
+/* Animation classes for filtering */
+.news-card.hidden {
+    transform: scale(0.95);
+    opacity: 0;
+    pointer-events: none;
+}
+/* 
+ * Forms (M3 Text Fields)
+ */
+.consultation-form, .comments-form {
+    background-color: var(--md-sys-color-surface-container);
+    padding: 2rem;
+    border-radius: 12px;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.m3-text-field {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid var(--md-sys-color-outline);
+    border-radius: 4px;
+    background-color: transparent;
+    color: var(--md-sys-color-on-surface);
+    font-family: 'Manrope', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.2s ease;
+}
+
+.m3-text-field:focus {
+    outline: none;
+    border-color: var(--md-sys-color-primary);
+    border-width: 2px;
+    padding: calc(1rem - 1px); /* Adjust padding to keep size consistent */
+}
+
+.form-group label {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    color: var(--md-sys-color-on-surface-variant);
+    background-color: var(--md-sys-color-surface-container);
+    padding: 0 0.25rem;
+    transition: all 0.2s ease;
+    pointer-events: none;
+}
+
+.m3-text-field:focus + label,
+.m3-text-field:not(:placeholder-shown) + label {
+    top: -0.75rem;
+    left: 0.75rem;
+    font-size: 0.75rem;
+    color: var(--md-sys-color-primary);
+    background-color: var(--md-sys-color-surface); /* Match form background */
+}
+
+/* To make :not(:placeholder-shown) work, we need a placeholder */
+.m3-text-field::placeholder {
+  color: transparent;
+}
+.select-field {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2344483E' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+}
+
+.form-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+}
+
+.form-group.checkbox-group {
+    margin-bottom: 1rem;
+}
+
+/* 
+ * Footer
+ */
+.footer {
+    background-color: var(--md-sys-color-surface-container);
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.footer p {
+    color: var(--md-sys-color-on-surface-variant);
+    font-size: 0.875rem;
+}
+
+/* 
+ * Contacts Section
+ */
+.contacts-section {
+    padding: 5rem 0;
+    background-color: var(--md-sys-color-surface-container);
+    border-radius: 40px;
+}
+
+.contacts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+.contacts-info h2 {
+    margin-bottom: 1rem;
+}
+
+.contacts-info > p {
+    margin-bottom: 2.5rem;
+    max-width: 500px;
+}
+
+.contact-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.contact-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+}
+
+.contact-list .material-symbols-outlined {
+    font-size: 24px;
+    color: var(--md-sys-color-primary);
+    background-color: var(--md-sys-color-surface-container-highest);
+    padding: 12px;
+    border-radius: 50%;
+}
+
+.contact-list h4 {
+    margin-bottom: 0.25rem;
+}
+
+.consultation-info {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.consultation-section {
+    margin-bottom: 2rem;
+}
+
+.consultation-section h4 {
+    color: var(--md-sys-color-on-surface);
+    margin-bottom: 1rem;
+}
+
+.consultation-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.consultation-list li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+.consultation-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--md-sys-color-primary);
+    font-weight: 600;
+}
+
+.consultant-info {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem;
+    background-color: var(--md-sys-color-surface-container-high);
+    border-radius: 16px;
+    margin-top: 2rem;
+}
+
+.consultant-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: var(--md-sys-color-tertiary-container);
+    color: var(--md-sys-color-on-tertiary-container);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.consultant-details p {
+    margin: 0;
+}
+.consultant-details .title-medium {
+    color: var(--md-sys-color-on-surface);
+}
+
+.consultant-details .body-medium {
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+.contacts-form {
+    background-color: var(--md-sys-color-surface);
+    padding: 2.5rem;
+    border-radius: 16px;
+}
+
+.contacts-form h3 {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.contacts-form .btn {
+    width: 100%;
+}
+
+/* 
+ * Responsive Design
+ */
+@media (max-width: 960px) {
+    #research .container {
+        padding: 0px;
+    }
+    .news-card{
+        padding: 1rem;
+    }
+    /* Header & Navigation */
+    .nav__menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        height: 100%;
+        background-color: var(--md-sys-color-surface-container);
+        padding: 6rem 2rem 4rem;
+        transition: right 0.4s ease;
+    }
+
+    .nav__list {
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+    }
+    
+    .nav__menu.show-menu {
+        right: 0;
+    }
+
+    .nav__close {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        display: inline-flex;
+    }
+    
+    .nav__toggle {
+        display: inline-flex;
+    }
+
+    .nav-item--dropdown:hover .dropdown-menu {
+        /* Disable hover effect on mobile */
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+    }
+    .nav-item--dropdown.active .dropdown-menu {
+        /* Show dropdown on click/tap */
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        box-shadow: none;
+        background-color: transparent;
+        padding: 1rem 0 0 1rem;
+        min-width: unset;
+    }
+    .dropdown-menu a {
+        padding: 0.5rem 1rem;
+    }
+    
+    .header__actions .theme-toggle-btn,
+    .header__actions .header__cta {
+        display: none;
+    }
+
+    /* Hero Section Mobile */
+    .hero {
+        text-align: center;
+    }
+
+    .hero__content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero__buttons {
+        justify-content: center;
+    }
+
+    /* Grid Layouts */
+    .solutions-layout,
+    .professionals-grid,
+    .contacts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .solutions-layout__header,
+    .solutions-layout__card-left,
+    .solutions-layout__card-right,
+    .solutions-layout__partners {
+        grid-column: 1 / 2;
+        grid-row: auto;
+    }
+
+    .professionals-grid > div {
+        grid-column: 1 / -1;
+        grid-row: auto;
+    }
+
+    .news-title {
+        word-break: break-word;
+    }
+
+    .news-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    .contacts-grid {
+        gap: 2rem;
+    }
+    
+    .contacts-info {
+        text-align: center;
+    }
+    
+    .contact-list {
+        align-items: center;
+    }
+
+    .contact-list li {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1rem;
+    }
+}
+
+/* News Filter Chips */
+.news-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+}
+
+.filter-chip {
+    background-color: var(--md-sys-color-surface-container);
+    color: var(--md-sys-color-on-surface);
+    border: 1px solid var(--md-sys-color-outline);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    font-size: 0.9rem;
+}
+
+.filter-chip:hover {
+    background-color: var(--md-sys-color-surface-container-high);
+}
+
+.filter-chip.active {
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    border-color: var(--md-sys-color-primary);
+}
+
+/* News Article Page */
+.news-article-section {
+    padding: 4rem 0;
+}
+
+.news-article {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.news-article h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.news-article .news-meta {
+    color: var(--md-sys-color-on-surface-variant);
+    margin-bottom: 2rem;
+}
+
+.news-article__image {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+}
+
+.news-article__content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.news-article__content p {
+    margin-bottom: 1.5rem;
+}
+
+.news-article__document, .news-article__tags {
+    margin-top: 2rem;
+}
+
+/* Ripple effect */
+.ripple-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    transform: scale(0);
+    animation: ripple 600ms linear;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* -------------------- */
+/* Material 3 Colors & Components */
+/* -------------------- */
+
+:root {
+  /* Light Theme Color Roles */
+  --color-primary: #006a6a;
+  --color-on-primary: #ffffff;
+  --color-surface: #fbfdfd;
+  --color-surface-container: #f0fafa;
+  --color-surface-container-high: #e5f4f4;
+  --color-on-surface: #191c1c;
+  --color-on-surface-variant: #3f4949;
+  --color-outline: #6f7979;
+}
+
+:root .dark-theme {
+  /* Dark Theme Color Roles */
+  --color-primary: #4ddada;
+  --color-on-primary: #003737;
+  --color-surface: #191c1c;
+  --color-surface-container: #222a2a;
+  --color-surface-container-high: #2d3535;
+  --color-on-surface: #e1e3e3;
+  --color-on-surface-variant: #bec9c9;
+  --color-outline: #899393;
+}
+
+/* Card Improvements */
+.news-card {
+  /* ... existing styles ... */
+  padding: 1.5rem; /* Increased padding */
+}
+
+/* Divider */
+.divider {
+  height: 0px;
+  background-color: var(--color-outline);
+  border: none;
+  margin: 0rem 0;
+  opacity: 0.5;
+}
+
+/* Chip System */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* Category Chip on Card */
+.chip.chip-category {
+  background-color: var(--color-surface-container-high);
+  color: var(--color-on-surface-variant);
+}
+
+/* Filter Chips */
+.filter-chip {
+  /* ... existing styles ... */
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filter-chip .material-symbols-outlined {
+  font-size: 1rem;
+  display: none; /* Hide by default */
+}
+
+.filter-chip.active .material-symbols-outlined {
+  display: inline-block; /* Show on active */
+}
+
+/* Hashtag Chips */
+.chip.chip-assist {
+  background-color: var(--color-surface-container);
+  color: var(--color-on-surface-variant);
+}
+
+/* Icon Button for Download */
+.icon-btn-news {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: var(--color-primary);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.icon-btn-news:hover {
+  background-color: var(--color-surface-container-high);
+}
+
+/* Article Page Readability */
+.news-article__content {
+  max-width: 75ch; /* Limit width for readability */
+}
+
+.news-article__header {
+  margin-bottom: 2rem;
+}
+.news-article__header h1 {
+  margin-top: 0.5rem;
+}
+
+.news-article__cta {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+/* Applying new colors to existing components */
+
+.news-card {
+    background-color: var(--md-sys-color-surface-container);
+}
+.news-badge { /* Deprecating .news-badge, using .chip now */
+    display: none;
+}
+
+/* 10. Блок новостей (Publications)   */
+/* ------------------------------------ */
+.publications-news .section-header {
+  margin-bottom: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.publications-news .section-header.centered {
+    justify-content: center;
+    text-align: center;
+}
+
+.news-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 32px;
+  justify-content: center; /* Центрируем фильтры */
+  align-items: center;
+}
+
+.news-cta {
+  text-align: center;
+}
+
+@media screen and (max-width: 500px) {
+    .publications-news .section-header {
+      justify-content: center;
+      text-align: center;
+    }
+    .news-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ------------------------------------ */
+/* 11. Страница отдельной новости      */
+/* ------------------------------------ */
+.news-article-page {
+    padding: 40px 0;
+}
+.news-article-page .news-content {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+.news-article-page .news-content p {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 1.5em;
+  color: var(--md-sys-color-on-surface);
+}
+
+.news-article-page .news-content a {
+  color: var(--md-sys-color-primary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--md-sys-color-primary);
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.news-article-page .news-content a:hover {
+  color: var(--md-sys-color-on-primary);
+  background-color: var(--md-sys-color-primary);
+  border-bottom-color: var(--md-sys-color-primary);
+}
+
+.news-article-page .news-content h2,
+.news-article-page .news-content h3,
+.news-article-page .news-content h4 {
+  margin-top: 2em;
+  margin-bottom: 1em;
+  font-weight: 600;
+  color: var(--md-sys-color-on-surface);
+}
+
+.news-article-page .news-content h2 {
+  font-size: 1.875rem; /* title-large */
+}
+
+.news-article-page .news-content h3 {
+  font-size: 1.5rem; /* title-medium */
+}
+.news-article-page .news-content h4 {
+  font-size: 1.25rem; /* title-small */
+}
+
+.news-article-page .news-content ul,
+.news-article-page .news-content ol {
+  margin-bottom: 1.5em;
+  padding-left: 2em;
+}
+.news-article-page .news-content li {
+  margin-bottom: 0.5em;
+}
+
+/* Add some space for the image */
+.news-article__image-container {
+  margin-bottom: 2em;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.news-article__image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Footer styles */
+.news-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-top: 24px;
+  border-top: 1px solid var(--md-sys-color-outline-variant);
+  margin-top: 32px;
+}
+
+/*
+ * ===============================================
+ *  News List Page
+ * ===============================================
+ */
+
+.news-list-section {
+  padding: 60px 0;
+}
+
+/* ------------------------------------ */
+/* 12. Адаптивность (Responsive)        */
+/* ------------------------------------ */
+
+@media screen and (max-width: 1024px) {
+    .professionals-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/*--------------------------------------------------------------
+# F.A.Q Section
+--------------------------------------------------------------*/
+.faq {
+  background-color: var(--md-sys-color-surface);
+}
+
+
+
+.faq .faq-item {
+  background-color: var(--md-sys-color-surface-container);
+  padding: 1.5rem;
+  border-radius: 24px;
+  border: 1px solid var(--md-sys-color-outline-variant);
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 1.5rem;
+  /* Prevent items from breaking across columns */
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+
+
+.faq .faq-item h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--md-sys-color-on-surface);
+  margin-bottom: 0.75rem;
+}
+
+.faq .faq-item p {
+  margin-bottom: 0;
+  line-height: 1.6;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+/* Use columns for desktop */
+@media (min-width: 960px) {
+  .faq .faq-grid {
+    column-count: 3;
+    column-gap: 1.5rem;
+  }
+}
+
+/* 
+ * Notification Animations
+ */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}

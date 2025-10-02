@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body_class %}news-article-page{% endblock %}
+
+{% block content %}
+<div class="container">
+    <header class="news-header">
+        <a href="{{ url_for('news_list') }}" class="btn btn--text" style="margin-bottom: 24px;"><span class="material-symbols-outlined">arrow_back</span> К списку новостей</a>
+        <h1>{{ title }}</h1>
+        <div class="news-meta">
+             <span class="chip chip-category">{{ primary_tag }}</span>
+            <p>Опубликовано: {{ formatted_date }}</p>
+        </div>
+    </header>
+
+    <article class="news-content">
+         {% if image %}
+            <div class="news-article__image-container">
+                <img src="{{ url_for('uploaded_file', filename=image) }}" alt="{{ title }}" class="news-article__image">
+            </div>
+        {% endif %}
+        {{ content|safe }}
+    </article>
+    
+    <footer class="news-footer">
+        {% if document %}
+            <a href="{{ url_for('uploaded_file', filename=document) }}" class="btn btn--primary" download>
+                <span class="material-symbols-outlined">download</span>
+                Скачать документ
+            </a>
+        {% endif %}
+         <div class="news-tags">
+            {% for tag in tags %}
+                <span class="chip chip-assist">#{{ tag }}</span>
+            {% endfor %}
+        </div>
+    </footer>
+</div>
+{% endblock %}
