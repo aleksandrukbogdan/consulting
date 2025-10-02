@@ -91,16 +91,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Expansion Panels (Accordion)
-    const accordion = document.querySelector('.specs-accordion');
-    if (accordion) {
-      const panels = accordion.querySelectorAll('.expansion-panel');
-      panels.forEach(panel => {
-        const header = panel.querySelector('.panel-header');
-        header.addEventListener('click', () => {
-          panel.classList.toggle('active');
+    // Expansion Panels (Accordion) for multiple accordions
+    const accordions = document.querySelectorAll('.specs-accordion');
+    if (accordions.length > 0) {
+        accordions.forEach(accordion => {
+            const panels = accordion.querySelectorAll('.expansion-panel');
+            panels.forEach(panel => {
+                const header = panel.querySelector('.panel-header');
+                header.addEventListener('click', () => {
+                    // Optional: close other panels in the same accordion
+                    /*
+                    panels.forEach(otherPanel => {
+                        if (otherPanel !== panel) {
+                            otherPanel.classList.remove('active');
+                        }
+                    });
+                    */
+                    panel.classList.toggle('active');
+                });
+            });
         });
-      });
     }
 
     // --- Функция загрузки новостей ---
@@ -358,5 +368,199 @@ document.addEventListener('DOMContentLoaded', () => {
             notification.style.animation = 'slideOut 0.3s ease-in';
             setTimeout(() => notification.remove(), 300);
         }, 5000);
+    }
+
+    // --- Логика квиза ---
+    const quizOverlay = document.getElementById('quiz-overlay');
+    const quizStartBtn = document.getElementById('quiz-start-btn');
+    const quizCloseBtn = document.getElementById('quiz-close-btn');
+    const quizModal = document.getElementById('quiz-modal');
+    const quizForm = document.getElementById('quizForm');
+
+    if (quizStartBtn && quizOverlay && quizCloseBtn && quizModal) {
+        // Открытие квиза
+        quizStartBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            quizOverlay.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Запретить прокрутку фона
+        });
+
+        // Закрытие квиза
+        const closeQuiz = () => {
+            quizOverlay.style.display = 'none';
+            document.body.style.overflow = ''; // Разрешить прокрутку фона
+            // Сброс квиза к первому шагу
+            goToStep(1);
+            quizForm.style.display = 'block';
+            quizModal.querySelector('[data-step="thanks"]').classList.remove('active');
+        };
+
+        quizCloseBtn.addEventListener('click', closeQuiz);
+        quizOverlay.addEventListener('click', (e) => {
+            if (e.target === quizOverlay) {
+                closeQuiz();
+            }
+        });
+
+        // Навигация по шагам
+        const quizSteps = quizModal.querySelectorAll('.quiz-step');
+        let currentStep = 1;
+
+        const goToStep = (stepNumber) => {
+            quizSteps.forEach(step => step.classList.remove('active'));
+            const targetStep = quizModal.querySelector(`.quiz-step[data-step="${stepNumber}"]`);
+            if(targetStep) {
+                targetStep.classList.add('active');
+                currentStep = stepNumber;
+            }
+        };
+
+        quizModal.addEventListener('click', (e) => {
+            if (e.target.matches('.quiz-next-btn')) {
+                // TODO: Добавить валидацию
+                goToStep(currentStep + 1);
+            }
+            if (e.target.matches('.quiz-prev-btn')) {
+                goToStep(currentStep - 1);
+            }
+            if(e.target.matches('.quiz-option-btn')) {
+                const step = e.target.closest('.quiz-step');
+                const hiddenInput = step.querySelector('input[type="hidden"]');
+                hiddenInput.value = e.target.dataset.value;
+                // Убираем класс selected у всех кнопок в этой группе
+                step.querySelectorAll('.quiz-option-btn').forEach(btn => btn.classList.remove('selected'));
+                // Добавляем класс selected нажатой кнопке
+                e.target.classList.add('selected');
+                // Автоматический переход на следующий шаг
+                setTimeout(() => goToStep(currentStep + 1), 200);
+            }
+            if(e.target.matches('.quiz-finish-btn')) {
+                closeQuiz();
+            }
+        });
+
+        // Обработка отправки формы квиза
+        if (quizForm) {
+            quizForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const submitBtn = quizForm.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Отправка...';
+                submitBtn.disabled = true;
+
+                try {
+                    const formData = new FormData(quizForm);
+                    const data = {
+                        name: formData.get('name'),
+                        phone: formData.get('phone'),
+                        email: formData.get('email'),
+                        project_sphere: formData.get('project_sphere'),
+                        project_stage: formData.get('project_stage'),
+                        type: 'Квиз' // Добавляем тип формы
+                    };
+
+                    // Отправляем данные на тот же вебхук
+                    const response = await fetch('/api/contact', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+
+                    if (response.ok) {
+                        quizForm.style.display = 'none';
+                        quizModal.querySelector('[data-step="thanks"]').classList.add('active');
+                    } else {
+                        const result = await response.json();
+                        showNotification(result.error || 'Ошибка при отправке квиза', 'error');
+                    }
+
+                } catch (error) {
+                    console.error('Ошибка при отправке квиза:', error);
+                    showNotification('Не удалось отправить данные. Попробуйте позже.', 'error');
+                } finally {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }
+            });
+        }
+    }
+
+    // --- Логика Pop-up при уходе ---
+    const exitOverlay = document.getElementById('exit-overlay');
+    const exitCloseBtn = document.getElementById('exit-close-btn');
+    const exitForm = document.getElementById('exitForm');
+
+    if (exitOverlay && exitCloseBtn && exitForm) {
+        const showExitPopup = () => {
+            // Проверяем, был ли попап уже показан в этой сессии
+            if (sessionStorage.getItem('exitPopupShown')) {
+                return;
+            }
+            exitOverlay.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            sessionStorage.setItem('exitPopupShown', 'true'); // Отмечаем, что попап был показан
+        };
+
+        const closeExitPopup = () => {
+            exitOverlay.style.display = 'none';
+            document.body.style.overflow = '';
+        };
+
+        // Показываем попап, когда мышь уходит за пределы окна
+        document.addEventListener('mouseout', (e) => {
+            if (!e.relatedTarget && e.clientY < 10) {
+                showExitPopup();
+            }
+        });
+
+        // Закрытие по кнопке
+        exitCloseBtn.addEventListener('click', closeExitPopup);
+
+        // Закрытие по клику на оверлей
+        exitOverlay.addEventListener('click', (e) => {
+            if (e.target === exitOverlay) {
+                closeExitPopup();
+            }
+        });
+
+        // Обработка отправки формы
+        exitForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = exitForm.querySelector('button[type="submit"]');
+            submitBtn.textContent = 'Отправка...';
+            submitBtn.disabled = true;
+
+            try {
+                const formData = new FormData(exitForm);
+                const data = {
+                    email: formData.get('email'),
+                    type: 'Заявка на гайд (уход с сайта)',
+                    name: 'Пользователь (уход с сайта)' // Добавляем имя по умолчанию
+                };
+
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    exitForm.parentElement.style.display = 'none';
+                    document.querySelector('.exit-modal-thanks').style.display = 'block';
+                    setTimeout(closeExitPopup, 3000);
+                } else {
+                    const result = await response.json();
+                    showNotification(result.error || 'Ошибка при отправке', 'error');
+                    submitBtn.textContent = 'Скачать гайд';
+                    submitBtn.disabled = false;
+                }
+
+            } catch (error) {
+                console.error('Ошибка при отправке формы ухода:', error);
+                showNotification('Не удалось отправить данные.', 'error');
+                submitBtn.textContent = 'Скачать гайд';
+                submitBtn.disabled = false;
+            }
+        });
     }
 });

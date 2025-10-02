@@ -3,431 +3,395 @@
 {% block body_class %}home-page{% endblock %}
 
 {% block content %}
-      <!-- Герой-секция с крупным заголовком и кнопками -->
-      <section class="hero">
-        <div class="hero__content">
-          <h1 class="display-large">Полевая лаборатория в ваших руках.</h1>
-          <p class="headline-small">
-            Анализатор «Скороход» — это свобода исследований. Получайте точные химико-экологические данные мгновенно, где бы вы ни находились: от университетской аудитории до самых отдаленных уголков природы.
-          </p>
-          <div class="hero__buttons">
-            <a href="#contacts" class="btn btn--primary">Связаться с нами</a>
-            <a href="#specs1" class="btn btn--outline">Посмотреть характеристики</a>
-            <a href="#education" class="btn btn--outline">Для образования</a>
-          </div>
+<!-- 1. Первый экран (Hero Section) -->
+<section class="hero" id="hero">
+    <div class="hero__content">
+        <h1 class="display-large">Превратим вашу идею в грант на 1 000 000 ₽</h1>
+        <p class="headline-small">
+            Полное сопровождение вашей заявки на конкурс «Студенческий стартап» от экспертов с опытом одобрения >300 проектов.
+        </p>
+        <div class="hero__buttons">
+            <a href="#" class="btn btn--primary" id="quiz-start-btn">Узнать шансы на победу</a>
         </div>
-      </section>
+        <div class="hero-bullets">
+            <div class="bullet">
+                <span class="material-symbols-outlined">check_circle</span>
+                <span>Одобрено >300 заявок</span>
+            </div>
+            <div class="bullet">
+                <span class="material-symbols-outlined">workspace_premium</span>
+                <span>Работаем до результата</span>
+            </div>
+            <div class="bullet">
+                <span class="material-symbols-outlined">schedule</span>
+                <span>Экономим вам 100+ часов</span>
+            </div>
+        </div>
+    </div>
+</section>
 
-      <!-- <section class="hero">
-            <div class="hero__content">
-                <h1>Точность, которой можно доверять</h1>
-                <p>Анализатор [Название] — это портативное решение для экспертных химико-экологических исследований, соответствующее требованиям стандартов [ГОСТ/ISO XXX].</p>
-                <div class="hero__buttons">
-                    <a href="#specs" class="btn btn--primary">Технические характеристики</a>
-                    <a href="#research" class="btn btn--outline">Применение в исследованиях</a>
+<!-- 2. Блок о сложностях («Боли») -->
+<section id="problems" class="section--problems">
+    <div class="container">
+        <div class="section-header centered">
+            <h2 class="headline-large">Подать заявку самому — это...</h2>
+        </div>
+        <div class="problems-grid">
+            <div class="problem-card">
+                <span class="material-symbols-outlined">folder_off</span>
+                <h3 class="title-large">Большой объем документов</h3>
+                <p class="body-large">Высокий риск ошибки и отказа из-за формальных требований, которые постоянно меняются.</p>
+            </div>
+            <div class="problem-card">
+                <span class="material-symbols-outlined">co_present</span>
+                <h3 class="title-large">Страх публичной защиты</h3>
+                <p class="body-large">Неуверенность в своих силах и отсутствие опыта презентации проекта перед экспертной комиссией.</p>
+            </div>
+            <div class="problem-card">
+                <span class="material-symbols-outlined">hourglass_empty</span>
+                <h3 class="title-large">Огромная трата времени</h3>
+                <p class="body-large">Подготовка заявки отнимает недели, которые можно было бы потратить на учебу или развитие проекта.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 3. Блок о решении («Мы поможем») -->
+<section id="solution" class="section--solution">
+    <div class="container">
+        <div class="section-header centered">
+            <h2 class="headline-large">Ваша задача — идея. Наша — грант.</h2>
+        </div>
+        <div class="solution-grid">
+            <div class="solution-item">
+                <div class="solution-text">
+                    <h3 class="title-large">Мы готовим безупречную заявку</h3>
+                    <p class="body-large">Берем на себя всю бумажную работу, заполняем документы в соответствии с актуальными требованиями и гарантируем прохождение формальной проверки.</p>
+                </div>
+                <div class="solution-icon">
+                    <span class="material-symbols-outlined">task_alt</span>
                 </div>
             </div>
-            Фоном лучше сделать не абстрактное фото, а стилизованное изображение прибора в лаборатории или график данных
-        </section> -->
-
-      <!-- Секция для школьников и учеников колледжей -->
-      <!-- <section id="students" class="audience-section section--students">
-            <div class="container">
-                <h2>Скучные опыты в учебнике? Попробуй настоящую науку!</h2>
-                <div class="content-wrapper">
-                    <div class="text-content">
-                        <h3>Представь, что ты детектив, который ищет следы веществ. Наш аппарат — твой супер-прибор. Проверь кислотность газировки, узнай, чистая ли вода в фонтанчике, или поставь настоящий эксперимент для проекта.</h3>
-                        <p> </p>
-                        <p>-Научиться создавать и оптимизировать хроматографические методы</p>
-                        <p>-Попробовать себя в роли разработчика методик</p>
-                        <p>-Освоить современное программное обеспечение</p>
-                        <p>-Обучиться пользовательским операциям по техническому обслуживанию прибора</p>
-                        <p> </p>
-                        <ul>
-                            <li>Просто и понятно</li>
-                            <li>Безопасно</li>
-                            <li>Поддержка проектов</li>
-                        </ul>
-                    </div>
-                    <div class="image-content">
-                        <img src="images/student.jpg" alt="Школьник проводит эксперимент с аппаратом">
-                    </div>
+            <div class="solution-item">
+                <div class="solution-text">
+                    <h3 class="title-large">Мы тренируем к защите</h3>
+                    <p class="body-large">Проводим репетиции питча, помогаем составить убедительную презентацию и учим отвечать на каверзные вопросы жюри.</p>
+                </div>
+                <div class="solution-icon">
+                    <span class="material-symbols-outlined">model_training</span>
                 </div>
             </div>
-        </section> -->
-      <section class="solutions-section" id="education">
-        <div class="container">
-            <div class="solutions-layout">
-                <div class="solutions-layout__header">
-                    <h2 class="headline-large">Решения для образования и науки</h2>
+            <div class="solution-item">
+                <div class="solution-text">
+                    <h3 class="title-large">Мы даем гарантию результата</h3>
+                    <p class="body-large">В договоре прописана наша финансовая ответственность: если вы не получаете грант, мы возвращаем деньги или дорабатываем заявку бесплатно.</p>
                 </div>
-                <div class="solutions-layout__card-left">
-                    <!-- Card 1: Schools -->
-                    <div class="solution-card">
-                        <h3 class="title-large">Современное оборудование для школ</h3>
-                        <div class="features-list">
-                            <div class="feature-item">
-                                <span class="feature-icon material-symbols-outlined">school</span>
-                                <div class="feature-text">
-                                    <h4 class="title-medium">Соответствие ФГОС</h4>
-                                    <p class="body-medium">
-                                        Оборудование позволяет выполнять практические работы в
-                                        соответствии с требованиями образовательных стандартов.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="feature-item">
-                                <span class="feature-icon material-symbols-outlined">science</span>
-                                <div class="feature-text">
-                                    <h4 class="title-medium">Проектная деятельность</h4>
-                                    <p class="body-medium">
-                                        Идеально подходит для выполнения индивидуальных и
-                                        групповых исследовательских проектов.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="feature-item">
-                                <span class="feature-icon material-symbols-outlined">emoji_events</span>
-                                <div class="feature-text">
-                                    <h4 class="title-medium">Подготовка к олимпиадам</h4>
-                                    <p class="body-medium">
-                                        Практическая подготовка учащихся к конкурсам и олимпиадам
-                                        по химии и экологии.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="solutions-layout__card-right">
-                    <!-- Card 2: Universities -->
-                    <div class="solution-card">
-                        <h3 class="title-large">Профессиональное оборудование для вузов</h3>
-                        <ul class="scientific-list body-large">
-                            <li>Практикумы по аналитической химии и экологическому мониторингу</li>
-                            <li>Курсовые и дипломные работы с реальными задачами</li>
-                            <li>Магистерские диссертации и аспирантские исследования</li>
-                            <li>Создание и оптимизация хроматографических методов</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="solutions-layout__partners">
-                    <div class="university-partners">
-                        <h4 class="title-medium">Используется в ведущих вузах:</h4>
-                        <div class="partners-chips">
-                            <div class="university-chip">Первый МГМУ им. И.М. Сеченова</div>
-                            <div class="university-chip">РНИМУ им. Н.И. Пирогова</div>
-                            <div class="university-chip">МГУ им. М.В. Ломоносова</div>
-                            <div class="university-chip">РХТУ им. Д.И. Менделеева</div>
-                        </div>
-                    </div>
+                <div class="solution-icon">
+                    <span class="material-symbols-outlined">verified</span>
                 </div>
             </div>
         </div>
-      </section>
+    </div>
+</section>
 
-      <!-- Секция для профессионалов -->
-      <section id="professionals" class="professionals-section">
-          <div class="container">
-              <div class="section-header">
-                  <span class="section-badge">Научные исследования</span>
-                  <h2 class="headline-large">
-                      Гибкие решения для полевых и лабораторных задач
-                  </h2>
-                  <div class="advantages-chips">
-                      <div class="advantage-chip">ГОСТ</div>
-                      <div class="advantage-chip">Поверка</div>
-                      <div class="advantage-chip">Калибровка</div>
-                      <div class="advantage-chip">Методическая поддержка</div>
-                  </div>
-              </div>
-              <div class="professionals-grid">
-                  <div class="research-card card-eco">
-                      <span class="material-symbols-outlined">eco</span>
-                      <h3 class="title-large">Экологический мониторинг</h3>
-                      <p class="body-large">Анализ чистоты воздуха, воды и почвы для контроля за состоянием окружающей среды.</p>
-                  </div>
-                  <div class="research-card card-agro">
-                      <span class="material-symbols-outlined">science</span>
-                      <h3 class="title-large">Агрохимические исследования</h3>
-                      <p class="body-large">Оценка плодородности почв и эффективности удобрений для повышения урожайности.</p>
-                  </div>
-                  <div class="research-card card-hydro">
-                      <span class="material-symbols-outlined">water_drop</span>
-                      <h3 class="title-large">Гидрохимический анализ</h3>
-                      <p class="body-large">Определяем состав и качество природных и сточных вод в соответствии с нормативными требованиями.</p>
-                  </div>
-                  <div class="research-card card-quality">
-                      <span class="material-symbols-outlined">local_pharmacy</span>
-                      <h3 class="title-large">Контроль качества</h3>
-                      <p class="body-large">Гарантия соответствия вашей продукции стандартам качества на всех этапах производства.</p>
-                  </div>
-                  <div class="panel-cta card-cta">
-                      <h3 class="title-large">Нужна консультация?</h3>
-                      <p class="body-large">Наши специалисты помогут подобрать решение для ваших исследовательских задач.</p>
-                      <a href="#contacts" class="btn btn--primary label-large">
-                          Запросить спецификацию
-                          <span class="material-symbols-outlined">arrow_forward</span>
-                      </a>
-                  </div>
-              </div>
-          </div>
-      </section>
-
-      <!-- Секция с техническими характеристиками (Таблица) -->
-      <section id="specs1" class="specs-section">
-        <div class="container">
-          <div class="section-header">
-            <h2 class="headline-large">Технические характеристики</h2>
-          </div>
-
-          <div class="specs-accordion">
-            <!-- Panel 1: Main Specs -->
-            <div class="expansion-panel">
-              <div class="panel-header">
-                <span class="material-symbols-outlined">tune</span>
-                <div class="panel-header-text">
-                  <h3 class="panel-title title-medium">Основные характеристики</h3>
-                  <p class="panel-subtitle body-medium">Ключевые параметры: габариты, вес, энергопотребление, рабочий диапазон.</p>
-                </div>
-                <span class="material-symbols-outlined panel-chevron">expand_more</span>
-              </div>
-              <div class="panel-content">
-                <table>
-                  <tbody>
-                    <tr><td>Исполнение</td><td>Моноблок</td><td>Моноблок</td></tr>
-                    <tr><td>Максимальное рабочее давление, МПа</td><td>35</td><td>35</td></tr>
-                    <tr><td>Насос</td><td>Последовательный плунжерный</td><td>Последовательный плунжерный</td></tr>
-                    <tr><td>Диапазон скорости потока, мл/мин</td><td>0,01 - 10</td><td>0,01 - 10</td></tr>
-                    <tr><td>Автоматическая промывка</td><td>Есть</td><td>Есть</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <!-- Panel 2: Analysis System -->
-            <div class="expansion-panel">
-              <div class="panel-header">
-                <span class="material-symbols-outlined">analytics</span>
-                <div class="panel-header-text">
-                  <h3 class="panel-title title-medium">Система анализа</h3>
-                  <p class="panel-subtitle body-medium">Принцип работы, типы измеряемых образцов и скорость обработки.</p>
-                </div>
-                <span class="material-symbols-outlined panel-chevron">expand_more</span>
-              </div>
-              <div class="panel-content">
-                <table>
-                  <tbody>
-                    <tr><td>Режимы элюирования</td><td>Изократический</td><td>Градиентный</td></tr>
-                    <tr><td>Вводы пробы</td><td>Полуавтоматический кран</td><td>Полуавтоматический кран</td></tr>
-                    <tr><td>Термостат колонок</td><td>4 колонки х 300 мм</td><td>4 колонки х 300 мм</td></tr>
-                    <tr><td>Диапазон температур, °С</td><td>(комн. – 10) - 99</td><td>(комн. – 10) - 99</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            
-            <!-- Panel 3: Detector System -->
-            <div class="expansion-panel">
-              <div class="panel-header">
-                <span class="material-symbols-outlined">lightbulb</span>
-                <div class="panel-header-text">
-                  <h3 class="panel-title title-medium">Детекторная система</h3>
-                  <p class="panel-subtitle body-medium">Тип детектора, его чувствительность, спектральное разрешение.</p>
-                </div>
-                <span class="material-symbols-outlined panel-chevron">expand_more</span>
-              </div>
-              <div class="panel-content">
-                <table>
-                    <tbody>
-                        <tr><td>Детектор</td><td>Спектрофотометрический</td><td>Спектрофотометрический</td></tr>
-                        <tr><td>Диапазон длин волн, нм</td><td>Фиксированные, 275 и 310</td><td>Переключаемые</td></tr>
-                        <tr><td>Источники излучения</td><td>Светодиоды</td><td>D2 и W лампы</td></tr>
-                    </tbody>
-                </table>
-              </div>
-            </div>
-
-            <!-- Panel 4: Kit & Conditions -->
-            <div class="expansion-panel">
-              <div class="panel-header">
-                <span class="material-symbols-outlined">inventory_2</span>
-                <div class="panel-header-text">
-                  <h3 class="panel-title title-medium">Комплектация и условия</h3>
-                  <p class="panel-subtitle body-medium">Что входит в стандартный комплект поставки и гарантийные обязательства.</p>
-                </div>
-                <span class="material-symbols-outlined panel-chevron">expand_more</span>
-              </div>
-              <div class="panel-content">
-                  <table>
-                      <tbody>
-                          <tr><td>В комплекте</td><td>Стандартный набор</td><td>Расширенный набор</td></tr>
-                          <tr><td>Габариты (ДхШхВ), мм</td><td>460х260х160</td><td>460х260х320</td></tr>
-                          <tr><td>Гарантия</td><td>2 года</td><td>2 года</td></tr>
-                          <tr><td>Сроки поставки</td><td>Не более 60 дней</td><td>Не более 60 дней</td></tr>
-                      </tbody>
-                  </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section id="research" class="publications-news">
-        <div class="container">
-          <div class="section-header centered">
-            <div class="section-header__text">
-            <span class="section-badge">Научный блог</span>
-            <h2>Последние исследования и публикации</h2>
-            <p>
-              Актуальные работы с использованием анализаторов ScienceDevice в
-              мировых научных изданиях
-            </p>
-            </div>
-          </div>
-
-          <div class="news-filters">
-            <button class="filter-chip active" data-filter="all">
-              <span class="material-symbols-outlined">done</span>
-              Недавние
-            </button>
-            <button class="filter-chip" data-filter="Экология"><span class="material-symbols-outlined">done</span>Экология</button>
-            <button class="filter-chip" data-filter="Химия"><span class="material-symbols-outlined">done</span>Химия</button>
-            <button class="filter-chip" data-filter="Образование">
-              <span class="material-symbols-outlined">done</span>Образование
-            </button>
-            <button class="filter-chip" data-filter="Промышленность">
-              <span class="material-symbols-outlined">done</span>Промышленность
-            </button>
-             <a href="/news/" class="btn btn--text">Все публикации</a>
-          </div>
-
-          <div id="news-container" class="news-grid">
-            <!-- Новости будут загружены сюда динамически -->
-          </div>
-           <!-- <div class="news-cta">
-             <a href="/news/" class="btn btn--secondary">Все публикации</a>
-        </div> -->
-        </div>
-      </section>
-      
-
-      <!-- Секция с призывом к действию (CTA) -->
-      <section id="contacts" class="contacts-section">
-        <div class="container">
-            <div class="contacts-grid">
-                <div class="contacts-info">
-                    <h2 class="headline-large">Давайте начнем проект</h2>
-                    <p class="body-large">
-                        Готовы начать работать с реальной наукой? Наша команда поможет
-                        подобрать лучшее решение для ваших задач.
-                    </p>
-                    <ul class="contact-list">
-                        <li>
-                            <span class="material-symbols-outlined">mail</span>
-                            <div>
-                                <h4 class="title-medium">Для общих вопросов</h4>
-                                <a href="mailto:biotech.info@mail.ru" class="body-large">biotech.info@mail.ru</a>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="material-symbols-outlined">call</span>
-                            <div>
-                                <h4 class="title-medium">Для консультаций</h4>
-                                <a href="tel:+79857632001" class="body-large">+7 (985) 763-20-01</a>
-                            </div>
-                        </li>
-                    </ul>
-                    <div class="consultant-info">
-                        <div class="consultant-avatar">ДИ</div>
-                        <div class="consultant-details">
-                            <p class="title-medium">Дмитрий Иванов</p>
-                            <p class="body-medium">Куратор проекта · к.х.н., ведущий специалист</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="contacts-form">
-                    <h3 class="title-large">Отправьте нам сообщение</h3>
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <input type="text" id="contactName" name="name" required class="m3-text-field" placeholder=" " />
-                            <label for="contactName">Ваше имя *</label>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" id="contactEmail" name="email" required class="m3-text-field" placeholder=" " />
-                            <label for="contactEmail">Email *</label>
-                        </div>
-                        <div class="form-group">
-                            <textarea id="contactMessage" name="message" rows="5" required class="m3-text-field" placeholder=" "></textarea>
-                            <label for="contactMessage">Сообщение *</label>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn--primary">
-                                Отправить
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-      </section>
-
-    <!-- ======= F.A.Q Section ======= -->
-    <section id="faq" class="faq">
-      <div class="container">
-
+<!-- 4. Блок о процессе работы -->
+<section id="process" class="specs-section">
+    <div class="container">
         <div class="section-header">
-          <span class="section-badge">Помощь</span>
-          <h2 class="headline-large">Ответы на вопросы</h2>
-          <p class="body-large">Здесь вы найдете ответы на самые популярные вопросы о наших учебных ВЭЖХ системах "Скороход". Не нашли ответа? Свяжитесь с нами для получения подробной консультации.</p>
+            <h2 class="headline-large">4 шага к вашему миллиону</h2>
         </div>
-
-        <div class="faq-grid">
-          <div class="faq-item">
-            <h4>Чем учебные ВЭЖХ «Скороход» отличаются от профессиональных моделей?</h4>
-            <p>Учебные хроматографы сохраняют ключевые компоненты и принципы работы профессиональных систем (насос, детектор, термостат, ПО), но выполнены в моноблочном компактном корпусе из ПЭЭК для легкости освоения и снижения стоимости. Они идеально подходят для отработки навыков без риска повредить дорогостоящее аналитическое оборудование.</p>
-          </div>
-          <div class="faq-item">
-            <h4>Какие эксперименты можно проводить на учебных ВЭЖХ?</h4>
-            <p>Разделение и анализ смесей органических соединений, изучение влияния состава подвижной фазы, температуры, типа колонки на разделение, определение концентраций веществ (например, витаминов, кофеина, антиоксидантов), работа с биомолекулами (белки, пептиды).</p>
-          </div>
-          <div class="faq-item">
-            <h4>Какое программное обеспечение идет в комплекте?</h4>
-            <p>Программное обеспечение «Мультихром» российского производства для полного управления прибором, сбора и обработки хроматографических данных.</p>
-          </div>
-          <div class="faq-item">
-            <h4>Есть ли градиентный режим элюирования?</h4>
-            <p>Да, продвинутая версия прибора поддерживает градиентный режим на стороне низкого давления по 2-м компонентам. Стандартная версия работает в изократическом режиме.</p>
-          </div>
-          <div class="faq-item">
-            <h4>Какие сроки поставки оборудования?</h4>
-            <p>Срок поставки не превышает 60 календарных дней с момента заключения договора.</p>
-          </div>
-          <div class="faq-item">
-            <h4>Какой гарантийный срок на оборудование?</h4>
-            <p>Расширенная гарантия на учебные ВЭЖХ «Скороход» составляет 2 года.</p>
-          </div>
-          <div class="faq-item">
-            <h4>Вы работаете по 44-ФЗ и 223-ФЗ (госзакупки)?</h4>
-            <p>Да, наша компания имеет опыт успешных поставок в рамках государственных и муниципальных закупок. Мы предоставляем все необходимые документы для участия в тендерах (техническое задание, коммерческое предложение, сертификаты).</p>
-          </div>
-          <div class="faq-item">
-            <h4>Предоставляется ли обучение работе на оборудовании?</h4>
-            <p>Да, в комплект поставки входит инструктаж по работе с прибором и программным обеспечением «Мультихром». Возможно проведение более глубоких обучающих семинаров.</p>
-          </div>
-          <div class="faq-item">
-            <h4>Где производится оборудование?</h4>
-            <p>Оборудование производится по полному циклу на собственных мощностях компании «Sevko & Co» в Московской области, что гарантирует короткие сроки поставки и отсутствие зависимости от импортных комплектующих.</p>
-          </div>
-          <div class="faq-item">
-            <h4>Почему именно ВЭЖХ «Скороход» для оснащения учебных классов?</h4>
-            <p>Потому что это российское оборудование, сочетающее доступную цену, полный функционал для обучения и отсутствие проблем с поставками и сервисом. Оно позволяет студентам работать на "живом" приборе, а не на симуляторах, что критически важно для формирования практических навыков.</p>
-          </div>
-          <div class="faq-item">
-            <h4>Как интегрировать ВЭЖХ в учебную программу?</h4>
-            <p>Мы готовы предоставить методические рекомендации и примеры лабораторных работ, разработанные совместно с ведущими научными институтами (такими как ИФХЭ РАН), для интеграции в курсы химии, биохимии и экологии.</p>
-          </div>
+        <div class="specs-accordion">
+            <div class="expansion-panel active">
+                <div class="panel-header">
+                    <span class="material-symbols-outlined">support_agent</span>
+                    <div class="panel-header-text">
+                        <h3 class="panel-title title-medium">1. Бесплатная консультация и оценка идеи</h3>
+                    </div>
+                    <span class="material-symbols-outlined panel-chevron">expand_more</span>
+                </div>
+                <div class="panel-content">
+                    <p>Вы оставляете заявку, мы связываемся с вами, чтобы оценить перспективы вашей идеи и ее соответствие критериям конкурса. Это бесплатно и ни к чему не обязывает.</p>
+                </div>
+            </div>
+            <div class="expansion-panel">
+                <div class="panel-header">
+                    <span class="material-symbols-outlined">description</span>
+                    <div class="panel-header-text">
+                        <h3 class="panel-title title-medium">2. Подготовка документов и заявки</h3>
+                    </div>
+                    <span class="material-symbols-outlined panel-chevron">expand_more</span>
+                </div>
+                <div class="panel-content">
+                    <p>Собираем всю необходимую информацию, пишем бизнес-план, смету и другие разделы заявки. От вас требуется только согласование и предоставление данных.</p>
+                </div>
+            </div>
+            <div class="expansion-panel">
+                <div class="panel-header">
+                    <span class="material-symbols-outlined">slideshow</span>
+                    <div class="panel-header-text">
+                        <h3 class="panel-title title-medium">3. Тренировка защиты проекта (питча)</h3>
+                    </div>
+                    <span class="material-symbols-outlined panel-chevron">expand_more</span>
+                </div>
+                <div class="panel-content">
+                    <p>Готовим вас к очной или онлайн-защите. Проводим несколько репетиций, учим держаться уверенно и отвечать на вопросы экспертов, чтобы у них не осталось сомнений.</p>
+                </div>
+            </div>
+            <div class="expansion-panel">
+                <div class="panel-header">
+                    <span class="material-symbols-outlined">payments</span>
+                    <div class="panel-header-text">
+                        <h3 class="panel-title title-medium">4. Получение гранта и помощь с отчетностью</h3>
+                    </div>
+                    <span class="material-symbols-outlined panel-chevron">expand_more</span>
+                </div>
+                <div class="panel-content">
+                    <p>После победы мы консультируем вас по вопросам заключения договора с фондом и помогаем с подготовкой первого отчета, чтобы вы успешно стартовали.</p>
+                </div>
+            </div>
         </div>
+    </div>
+</section>
 
-      </div>
-    </section><!-- End F.A.Q Section -->
+<!-- 5. Блок с кейсами -->
+<section id="cases" class="cases-section">
+    <div class="container">
+        <div class="section-header centered">
+            <h2 class="headline-large">Уже <span id="student-count">312</span> студентов получили грант с нашей помощью</h2>
+        </div>
+        <div class="partners-chips">
+            <div class="university-chip">МГУ им. М.В. Ломоносова</div>
+            <div class="university-chip">ВШЭ</div>
+            <div class="university-chip">МГТУ им. Баумана</div>
+            <div class="university-chip">ИТМО</div>
+            <div class="university-chip">РХТУ им. Д.И. Менделеева</div>
+            <div class="university-chip">... и еще 20+ вузов</div>
+        </div>
+        <div class="cases-grid">
+            <div class="case-card">
+                <img src="images/student1.jpg" alt="Фото студента" class="case-photo">
+                <div class="case-content">
+                    <h3 class="title-medium">Алексей П.</h3>
+                    <p class="body-medium"><strong>Проект:</strong> Платформа для VR-реабилитации</p>
+                    <p class="body-medium"><strong>Грант:</strong> 1 000 000 ₽</p>
+                    <blockquote class="case-review">
+                        «Даже не думал, что пройду. Ребята помогли упаковать идею так, что комиссия была в восторге. Спасибо!»
+                    </blockquote>
+                </div>
+            </div>
+            <div class="case-card">
+                <img src="images/student2.jpg" alt="Фото студента" class="case-photo">
+                <div class="case-content">
+                    <h3 class="title-medium">Мария И.</h3>
+                    <p class="body-medium"><strong>Проект:</strong> Эко-пластик из водорослей</p>
+                    <p class="body-medium"><strong>Грант:</strong> 1 000 000 ₽</p>
+                    <blockquote class="case-review">
+                        «Самое ценное — подготовка к питчу. Я чувствовала себя абсолютно уверенно и знала ответы на все вопросы.»
+                    </blockquote>
+                </div>
+            </div>
+            <div class="case-card">
+                <img src="images/student3.jpg" alt="Фото студента" class="case-photo">
+                <div class="case-content">
+                    <h3 class="title-medium">Тимур Б.</h3>
+                    <p class="body-medium"><strong>Проект:</strong> Нейросеть для агромониторинга</p>
+                    <p class="body-medium"><strong>Грант:</strong> 1 000 000 ₽</p>
+                    <blockquote class="case-review">
+                        «Сэкономил кучу времени и нервов. Пока команда готовила заявку, я спокойно дорабатывал прототип.»
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 6. Блок «Команда» -->
+<section id="team" class="team-section">
+    <div class="container">
+        <div class="section-header centered">
+            <h2 class="headline-large">С вами будет работать команда экспертов, а не фрилансеры</h2>
+        </div>
+        <div class="team-grid">
+            <div class="team-member">
+                <img src="images/expert1.jpg" alt="Фото эксперта" class="team-photo">
+                <h3 class="title-large">Дмитрий Иванов</h3>
+                <p class="body-large"><strong>Руководитель, к.э.н.</strong></p>
+                <p class="body-medium">Привлек >100 млн ₽ инвестиций в стартапы, бывший трекер ФРИИ.</p>
+            </div>
+            <div class="team-member">
+                <img src="images/expert2.jpg" alt="Фото эксперта" class="team-photo">
+                <h3 class="title-large">Анна Смирнова</h3>
+                <p class="body-large"><strong>Эксперт по бизнес-планированию</strong></p>
+                <p class="body-medium">10 лет опыта в консалтинге, подготовила >200 успешных бизнес-планов.</p>
+            </div>
+            <div class="team-member">
+                <img src="images/expert3.jpg" alt="Фото эксперта" class="team-photo">
+                <h3 class="title-large">Егор Петров</h3>
+                <p class="body-large"><strong>Тренер по публичным выступлениям</strong></p>
+                <p class="body-medium">Помог >50 спикерам подготовиться к выступлениям на TEDx и других конференциях.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 7. Блок «Тарифы» -->
+<section id="tariffs" class="tariffs-section">
+    <div class="container">
+        <div class="section-header centered">
+            <h2 class="headline-large">Выберите свой формат работы</h2>
+        </div>
+        <div class="tariffs-grid">
+            <div class="tariff-card">
+                <h3 class="title-large">Консультация</h3>
+                <p class="tariff-price">1 900 ₽</p>
+                <ul class="tariff-features">
+                    <li>Оценка вашей идеи и шансов на победу</li>
+                    <li>Разбор критериев конкурса</li>
+                    <li>Ответы на ваши вопросы</li>
+                </ul>
+                <a href="#contacts" class="btn btn--outline">Выбрать</a>
+            </div>
+            <div class="tariff-card popular">
+                <span class="tariff-badge">Популярный</span>
+                <h3 class="title-large">Под ключ</h3>
+                <p class="tariff-price">49 000 ₽</p>
+                <ul class="tariff-features">
+                    <li>Полная подготовка заявки</li>
+                    <li>Тренировка защиты проекта</li>
+                    <li>Гарантия результата по договору</li>
+                    <li>Помощь с отчетностью</li>
+                </ul>
+                <a href="#contacts" class="btn btn--primary">Выбрать</a>
+            </div>
+            <div class="tariff-card">
+                <h3 class="title-large">Подготовка к защите</h3>
+                <p class="tariff-price">15 000 ₽</p>
+                <ul class="tariff-features">
+                    <li>Аудит готовой заявки</li>
+                    <li>Составление питча и презентации</li>
+                    <li>Три репетиции с экспертом</li>
+                </ul>
+                <a href="#contacts" class="btn btn--outline">Выбрать</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 8. Блок FAQ -->
+<section id="faq" class="specs-section">
+    <div class="container">
+        <div class="section-header centered">
+            <span class="section-badge">Помощь</span>
+            <h2 class="headline-large">Ответы на вопросы</h2>
+        </div>
+        <div class="specs-accordion">
+            <div class="expansion-panel">
+                <div class="panel-header">
+                    <div class="panel-header-text"><h3 class="panel-title title-medium">Какие у меня гарантии?</h3></div>
+                    <span class="material-symbols-outlined panel-chevron">expand_more</span>
+                </div>
+                <div class="panel-content">
+                    <p>Наша главная гарантия — финансовая ответственность, прописанная в договоре. Если ваша заявка не проходит, мы либо возвращаем деньги, либо бесплатно дорабатываем и подаем ее на следующий конкурс.</p>
+                </div>
+            </div>
+            <div class="expansion-panel">
+                <div class="panel-header">
+                    <div class="panel-header-text"><h3 class="panel-title title-medium">Что если у меня только идея?</h3></div>
+                    <span class="material-symbols-outlined panel-chevron">expand_more</span>
+                </div>
+                <div class="panel-content">
+                    <p>Этого достаточно! Мы поможем вам развить идею в полноценную концепцию, составить бизнес-план и описать проект так, чтобы он соответствовал требованиям фонда и выглядел перспективным в глазах жюри.</p>
+                </div>
+            </div>
+            <div class="expansion-panel">
+                <div class="panel-header">
+                    <div class="panel-header-text"><h3 class="panel-title title-medium">Сколько стоят ваши услуги?</h3></div>
+                    <span class="material-symbols-outlined panel-chevron">expand_more</span>
+                </div>
+                <div class="panel-content">
+                    <p>Стоимость зависит от выбранного тарифа. Самый популярный формат «Под ключ» стоит 49 000 ₽. Мы работаем по предоплате, возможна рассрочка. Оплата идет по договору, что гарантирует нашу ответственность.</p>
+                </div>
+            </div>
+            <div class="expansion-panel">
+                <div class="panel-header">
+                    <div class="panel-header-text"><h3 class="panel-title title-medium">Вы работаете со студентами не из Москвы?</h3></div>
+                    <span class="material-symbols-outlined panel-chevron">expand_more</span>
+                </div>
+                <div class="panel-content">
+                    <p>Да, конечно. Весь процесс — от консультации до тренировки питча — может проходить полностью в онлайн-формате. Мы успешно работали со студентами из более чем 30 городов России.</p>
+                </div>
+            </div>
+            <div class="expansion-panel">
+                <div class="panel-header">
+                    <div class="panel-header-text"><h3 class="panel-title title-medium">Что будет после получения гранта?</h3></div>
+                    <span class="material-symbols-outlined panel-chevron">expand_more</span>
+                </div>
+                <div class="panel-content">
+                    <p>Мы поможем вам разобраться с процессом заключения договора с фондом и подготовить первый обязательный отчет. Дальше вы сможете развивать свой проект самостоятельно или обратиться к нам за дополнительными консультациями.</p>
+                </div>
+            </div>
+            <div class="expansion-panel">
+                <div class="panel-header">
+                    <div class="panel-header-text"><h3 class="panel-title title-medium">Обязательно ли быть студентом?</h3></div>
+                    <span class="material-symbols-outlined panel-chevron">expand_more</span>
+                </div>
+                <div class="panel-content">
+                    <p>Да, для конкурса «Студенческий стартап» необходимо быть студентом (бакалавриат, специалитет, магистратура, аспирантура) российского вуза. Также могут участвовать недавние выпускники (до 3 лет после выпуска).</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 9. Финальный блок призыва к действию (CTA) -->
+<section id="contacts" class="contacts-section">
+    <div class="container">
+        <div class="contacts-grid">
+            <div class="contacts-info">
+                <h2 class="headline-large">Готовы сделать первый шаг к своему стартапу?</h2>
+                <p class="body-large">
+                    Оставьте заявку на бесплатную консультацию, и мы оценим ваши шансы на получение гранта в 1 000 000 ₽.
+                </p>
+                <ul class="contact-list">
+                    <li>
+                        <span class="material-symbols-outlined">mail</span>
+                        <div>
+                            <h4 class="title-medium">Email</h4>
+                            <a href="mailto:grant.startup@mail.ru" class="body-large">grant.startup@mail.ru</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="material-symbols-outlined">call</span>
+                        <div>
+                            <h4 class="title-medium">Телефон</h4>
+                            <a href="tel:+79991234567" class="body-large">+7 (999) 123-45-67</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="contacts-form">
+                <h3 class="title-large">Заявка на консультацию</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="contactName" name="name" required class="m3-text-field" placeholder=" ">
+                        <label for="contactName">Ваше имя *</label>
+                    </div>
+                     <div class="form-group">
+                        <input type="tel" id="contactPhone" name="phone" required class="m3-text-field" placeholder=" ">
+                        <label for="contactPhone">Телефон *</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="contactEmail" name="email" required class="m3-text-field" placeholder=" ">
+                        <label for="contactEmail">Email *</label>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn--primary">
+                            Отправить
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %}ScienceDevice - Твой проводник в мир науки{% endblock %}</title>
+    <title>{% block title %}Грант-Консалтинг - Получи свой миллион{% endblock %}</title>
     <!-- Подключаем шрифты -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,31 +18,25 @@
     <header class="header sticky">
       <nav class="nav container">
         <a href="/" class="logo">
-          <img src="{{ url_for('static', filename='images/logo_glass.png') }}" alt="ScienceDevice - профессиональные анализаторы" class="logo-image" />
+          <img src="{{ url_for('static', filename='images/logo_glass.png') }}" alt="Грант-Консалтинг" class="logo-image" />
         </a>
         <div class="nav__menu" id="nav-menu">
           <ul class="nav__list">
-            <li class="nav-item"><a href="/" class="nav-link">Главная</a></li>
-            <li class="nav-item nav-item--dropdown">
-              <a href="/#education" class="nav-link">Образование <span class="material-symbols-outlined">expand_more</span></a>
-              <ul class="dropdown-menu">
-                <li><a href="/#education">Для школы и вузов</a></li>
-                <li><a href="/#professionals">Для лабораторий</a></li>
-              </ul>
-            </li>
-            <li class="nav-item"><a href="/#specs1" class="nav-link">О продукте</a></li>
-            <li class="nav-item"><a href="/#research" class="nav-link">Публикации</a></li>
-            <li class="nav-item"><a href="/#contacts" class="nav-link">Контакты</a></li>
+            <li class="nav-item"><a href="/#tariffs" class="nav-link">Услуги</a></li>
+            <li class="nav-item"><a href="/#cases" class="nav-link">Кейсы</a></li>
+            <li class="nav-item"><a href="/#team" class="nav-link">Команда</a></li>
+            <li class="nav-item"><a href="/#faq" class="nav-link">FAQ</a></li>
           </ul>
            <button class="icon-btn nav__close" id="nav-close" aria-label="Закрыть меню">
             <span class="material-symbols-outlined">close</span>
           </button>
         </div>
         <div class="header__actions">
+          <a href="tel:+79991234567" class="nav-link header-phone">+7 (999) 123-45-67</a>
+          <a href="#contacts" class="btn btn--primary header__cta">Получить консультацию</a>
           <button class="icon-btn theme-toggle-btn" id="theme-toggle-desktop" aria-label="Переключить тему">
             <span class="material-symbols-outlined">light_mode</span>
           </button>
-          <a href="#contacts" class="btn btn--primary header__cta">Отправить запрос</a>
           <button class="icon-btn nav__toggle" id="nav-toggle" aria-label="Открыть меню">
             <span class="material-symbols-outlined">menu</span>
           </button>
@@ -53,6 +47,95 @@
     <main>
         {% block content %}{% endblock %}
     </main>
+
+    <!-- Квиз-форма (Pop-up) -->
+    <div class="quiz-overlay" id="quiz-overlay">
+        <div class="quiz-modal" id="quiz-modal">
+            <button class="icon-btn quiz-close-btn" id="quiz-close-btn" aria-label="Закрыть квиз">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <form id="quizForm">
+                <div class="quiz-step active" data-step="1">
+                    <h3 class="title-large">Узнайте свои шансы на победу!</h3>
+                    <p>Ответьте на 3 вопроса, и мы пришлем вам оценку шансов и чек-лист по подготовке проекта.</p>
+                    <div class="form-group">
+                        <input type="text" id="quizName" name="name" required class="m3-text-field" placeholder=" ">
+                        <label for="quizName">Ваше имя *</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="quizPhone" name="phone" required class="m3-text-field" placeholder=" ">
+                        <label for="quizPhone">Телефон / Telegram *</label>
+                    </div>
+                    <button type="button" class="btn btn--primary quiz-next-btn">Далее</button>
+                </div>
+                <div class="quiz-step" data-step="2">
+                    <h3 class="title-large">В какой сфере ваш проект?</h3>
+                    <div class="quiz-options">
+                        <button type="button" class="quiz-option-btn" data-value="IT и нейросети">IT и нейросети</button>
+                        <button type="button" class="quiz-option-btn" data-value="Биотехнологии">Биотехнологии</button>
+                        <button type="button" class="quiz-option-btn" data-value="Инженерия">Инженерия</button>
+                        <button type="button" class="quiz-option-btn" data-value="Образование">Образование</button>
+                        <button type="button" class="quiz-option-btn" data-value="Другое">Другое</button>
+                    </div>
+                    <input type="hidden" name="project_sphere">
+                    <button type="button" class="btn btn--secondary quiz-prev-btn">Назад</button>
+                </div>
+                <div class="quiz-step" data-step="3">
+                    <h3 class="title-large">На какой стадии готовности ваш проект?</h3>
+                     <div class="quiz-options">
+                        <button type="button" class="quiz-option-btn" data-value="Только идея">Только идея</button>
+                        <button type="button" class="quiz-option-btn" data-value="Есть MVP / Прототип">Есть MVP / Прототип</button>
+                        <button type="button" class="quiz-option-btn" data-value="Уже есть первые продажи">Уже есть первые продажи</button>
+                        <button type="button" class="quiz-option-btn" data-value="Другое">Другое</button>
+                    </div>
+                    <input type="hidden" name="project_stage">
+                    <button type="button" class="btn btn--secondary quiz-prev-btn">Назад</button>
+                </div>
+                <div class="quiz-step" data-step="4">
+                    <h3 class="title-large">Последний шаг!</h3>
+                    <p>Оставьте ваш Email, чтобы мы прислали вам результат и бонусный чек-лист.</p>
+                     <div class="form-group">
+                        <input type="email" id="quizEmail" name="email" required class="m3-text-field" placeholder=" ">
+                        <label for="quizEmail">Email *</label>
+                    </div>
+                    <button type="submit" class="btn btn--primary">Получить результат</button>
+                    <button type="button" class="btn btn--secondary quiz-prev-btn">Назад</button>
+                </div>
+            </form>
+            <div class="quiz-step" data-step="thanks">
+                <span class="material-symbols-outlined quiz-thanks-icon">check_circle</span>
+                <h3 class="title-large">Спасибо за заявку!</h3>
+                <p>Мы скоро свяжемся с вами, чтобы обсудить детали и оценить шансы вашего проекта. Результаты и чек-лист уже летят на вашу почту!</p>
+                <button class="btn btn--primary quiz-finish-btn">Закрыть</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pop-up при уходе с сайта -->
+    <div class="exit-overlay" id="exit-overlay">
+        <div class="exit-modal" id="exit-modal">
+             <button class="icon-btn exit-close-btn" id="exit-close-btn" aria-label="Закрыть">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <div class="exit-modal-content">
+                <span class="material-symbols-outlined exit-icon">outgoing_mail</span>
+                <h3 class="title-large">Постойте!</h3>
+                <p>Прежде чем вы уйдете, скачайте наш бесплатный гайд «5 типичных ошибок в заявке на Студенческий стартап». Просто оставьте свой email.</p>
+                <form id="exitForm">
+                    <div class="form-group">
+                        <input type="email" id="exitEmail" name="email" required class="m3-text-field" placeholder=" ">
+                        <label for="exitEmail">Ваш Email *</label>
+                    </div>
+                    <button type="submit" class="btn btn--primary">Скачать гайд</button>
+                </form>
+            </div>
+             <div class="exit-modal-thanks" style="display: none;">
+                <span class="material-symbols-outlined quiz-thanks-icon">check_circle</span>
+                <h3 class="title-large">Отлично!</h3>
+                <p>Гайд уже летит на вашу почту. Успехов с проектом!</p>
+            </div>
+        </div>
+    </div>
 
     <!-- Подвал сайта -->
     <footer class="footer">

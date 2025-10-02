@@ -310,8 +310,11 @@ def contact_form():
         webhook_data = {
             'name': data.get('name'),
             'email': data.get('email'),
-            'message': data.get('message')
-            
+            'phone': data.get('phone'),
+            'message': data.get('message'),
+            'project_sphere': data.get('project_sphere'),
+            'project_stage': data.get('project_stage'),
+            'type': data.get('type', 'Форма контактов') # Определяем тип формы
         }
         
         # Отправка в Make.com
