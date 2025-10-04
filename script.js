@@ -34,45 +34,26 @@ document.addEventListener('DOMContentLoaded', () => {
     // Active Link Highlighting on Scroll
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav__list a.nav-link');
+    const headerHeight = document.querySelector('.header').offsetHeight;
 
-    const observer = new IntersectionObserver((entries) => {
-        let activeSectionId = null;
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                if (!activeSectionId) { // Only set the first intersecting section as active
-                    activeSectionId = entry.target.id;
-                }
-            }
-        });
+    function highlightNavLink() {
+        let index = sections.length;
 
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            const href = link.getAttribute('href');
-            // Match '/#section' or '#section'
-            const linkSectionId = href.substring(href.lastIndexOf('#') + 1);
+        while(--index && window.scrollY + headerHeight < sections[index].offsetTop) {}
+        
+        navLinks.forEach((link) => link.classList.remove('active'));
 
-            if (linkSectionId === activeSectionId) {
-                link.classList.add('active');
-            }
-        });
-
-        // Special case for home link
-        const homeLink = document.querySelector('.nav__list a.nav-link[href="/"]');
-        if (homeLink) {
-             // If no section is active and we are near the top, highlight home
-            if (!activeSectionId && window.scrollY < 200) {
-                 navLinks.forEach(link => link.classList.remove('active')); // Clear all
-                homeLink.classList.add('active');
-            } else if (activeSectionId) {
-                homeLink.classList.remove('active');
-            }
+        // Ensure there's a link to highlight
+        const activeLink = document.querySelector(`.nav__list a.nav-link[href*="${sections[index].id}"]`);
+        if (activeLink) {
+            activeLink.classList.add('active');
         }
+    }
 
-    }, { rootMargin: '-40% 0px -60% 0px' });
-
-    sections.forEach(section => {
-        observer.observe(section);
-    });
+    // Initial highlight
+    highlightNavLink();
+    // Highlight on scroll
+    window.addEventListener('scroll', highlightNavLink);
 
     // Mobile Navigation
     const navMenu = document.getElementById('nav-menu'),
@@ -370,121 +351,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 5000);
     }
 
-    // --- Логика квиза ---
-    const quizOverlay = document.getElementById('quiz-overlay');
-    const quizStartBtn = document.getElementById('quiz-start-btn');
-    const quizCloseBtn = document.getElementById('quiz-close-btn');
-    const quizModal = document.getElementById('quiz-modal');
-    const quizForm = document.getElementById('quizForm');
-
-    if (quizStartBtn && quizOverlay && quizCloseBtn && quizModal) {
-        // Открытие квиза
-        quizStartBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            quizOverlay.style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Запретить прокрутку фона
-        });
-
-        // Закрытие квиза
-        const closeQuiz = () => {
-            quizOverlay.style.display = 'none';
-            document.body.style.overflow = ''; // Разрешить прокрутку фона
-            // Сброс квиза к первому шагу
-            goToStep(1);
-            quizForm.style.display = 'block';
-            quizModal.querySelector('[data-step="thanks"]').classList.remove('active');
-        };
-
-        quizCloseBtn.addEventListener('click', closeQuiz);
-        quizOverlay.addEventListener('click', (e) => {
-            if (e.target === quizOverlay) {
-                closeQuiz();
-            }
-        });
-
-        // Навигация по шагам
-        const quizSteps = quizModal.querySelectorAll('.quiz-step');
-        let currentStep = 1;
-
-        const goToStep = (stepNumber) => {
-            quizSteps.forEach(step => step.classList.remove('active'));
-            const targetStep = quizModal.querySelector(`.quiz-step[data-step="${stepNumber}"]`);
-            if(targetStep) {
-                targetStep.classList.add('active');
-                currentStep = stepNumber;
-            }
-        };
-
-        quizModal.addEventListener('click', (e) => {
-            if (e.target.matches('.quiz-next-btn')) {
-                // TODO: Добавить валидацию
-                goToStep(currentStep + 1);
-            }
-            if (e.target.matches('.quiz-prev-btn')) {
-                goToStep(currentStep - 1);
-            }
-            if(e.target.matches('.quiz-option-btn')) {
-                const step = e.target.closest('.quiz-step');
-                const hiddenInput = step.querySelector('input[type="hidden"]');
-                hiddenInput.value = e.target.dataset.value;
-                // Убираем класс selected у всех кнопок в этой группе
-                step.querySelectorAll('.quiz-option-btn').forEach(btn => btn.classList.remove('selected'));
-                // Добавляем класс selected нажатой кнопке
-                e.target.classList.add('selected');
-                // Автоматический переход на следующий шаг
-                setTimeout(() => goToStep(currentStep + 1), 200);
-            }
-            if(e.target.matches('.quiz-finish-btn')) {
-                closeQuiz();
-            }
-        });
-
-        // Обработка отправки формы квиза
-        if (quizForm) {
-            quizForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const submitBtn = quizForm.querySelector('button[type="submit"]');
-                const originalText = submitBtn.textContent;
-                submitBtn.textContent = 'Отправка...';
-                submitBtn.disabled = true;
-
-                try {
-                    const formData = new FormData(quizForm);
-                    const data = {
-                        name: formData.get('name'),
-                        phone: formData.get('phone'),
-                        email: formData.get('email'),
-                        project_sphere: formData.get('project_sphere'),
-                        project_stage: formData.get('project_stage'),
-                        type: 'Квиз' // Добавляем тип формы
-                    };
-
-                    // Отправляем данные на тот же вебхук
-                    const response = await fetch('/api/contact', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(data)
-                    });
-
-                    if (response.ok) {
-                        quizForm.style.display = 'none';
-                        quizModal.querySelector('[data-step="thanks"]').classList.add('active');
-                    } else {
-                        const result = await response.json();
-                        showNotification(result.error || 'Ошибка при отправке квиза', 'error');
-                    }
-
-                } catch (error) {
-                    console.error('Ошибка при отправке квиза:', error);
-                    showNotification('Не удалось отправить данные. Попробуйте позже.', 'error');
-                } finally {
-                    submitBtn.textContent = originalText;
-                    submitBtn.disabled = false;
-                }
-            });
-        }
-    }
-
     // --- Логика Pop-up при уходе ---
     const exitOverlay = document.getElementById('exit-overlay');
     const exitCloseBtn = document.getElementById('exit-close-btn');
@@ -559,6 +425,94 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('Ошибка при отправке формы ухода:', error);
                 showNotification('Не удалось отправить данные.', 'error');
                 submitBtn.textContent = 'Скачать гайд';
+                submitBtn.disabled = false;
+            }
+        });
+    }
+    
+    // --- Логика квиза на странице ---
+    const quizContainer = document.querySelector('.quiz-container');
+    if (quizContainer) {
+        const steps = quizContainer.querySelectorAll('.quiz-step');
+        const progressBar = quizContainer.querySelector('.quiz-progress-bar');
+        const form = document.getElementById('quizFormPage');
+        const sphereInput = document.getElementById('quiz-project-sphere');
+        const stageInput = document.getElementById('quiz-project-stage');
+
+        let currentStep = 1;
+        const totalSteps = 3; // 2 вопроса + 1 форма
+
+        const goToStep = (stepNumber) => {
+            steps.forEach(step => step.classList.remove('active'));
+            const targetStep = quizContainer.querySelector(`.quiz-step[data-step="${stepNumber}"]`);
+            if (targetStep) {
+                targetStep.classList.add('active');
+                currentStep = stepNumber;
+                
+                // Обновляем прогресс-бар
+                const progress = (currentStep <= totalSteps) ? ((currentStep - 1) / totalSteps) * 100 + (100 / totalSteps) : 100;
+                progressBar.style.width = `${progress}%`;
+            }
+        };
+
+        quizContainer.addEventListener('click', (e) => {
+            if (e.target.matches('.quiz-option-btn')) {
+                const nextStep = parseInt(e.target.dataset.next, 10);
+                const value = e.target.dataset.value;
+                const currentStepElem = e.target.closest('.quiz-step');
+                const stepNumber = parseInt(currentStepElem.dataset.step, 10);
+
+                // Сохраняем значение
+                if (stepNumber === 1) {
+                    sphereInput.value = value;
+                } else if (stepNumber === 2) {
+                    stageInput.value = value;
+                }
+
+                // Убираем класс selected у всех кнопок в этой группе
+                currentStepElem.querySelectorAll('.quiz-option-btn').forEach(btn => btn.classList.remove('selected'));
+                // Добавляем класс selected нажатой кнопке
+                e.target.classList.add('selected');
+
+                // Плавный переход
+                setTimeout(() => goToStep(nextStep), 300);
+            }
+        });
+        
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = form.querySelector('button[type="submit"]');
+            submitBtn.textContent = 'Отправка...';
+            submitBtn.disabled = true;
+
+            try {
+                const formData = new FormData(form);
+                const data = {
+                    name: formData.get('name'),
+                    phone: formData.get('phone'),
+                    email: formData.get('email'),
+                    project_sphere: formData.get('project_sphere'),
+                    project_stage: formData.get('project_stage'),
+                    type: 'Квиз (со страницы)'
+                };
+
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    goToStep('thanks');
+                } else {
+                    const result = await response.json();
+                    showNotification(result.error || 'Ошибка при отправке', 'error');
+                }
+            } catch (error) {
+                console.error('Ошибка при отправке квиза:', error);
+                showNotification('Не удалось отправить данные.', 'error');
+            } finally {
+                submitBtn.textContent = 'Получить результат и чек-лист';
                 submitBtn.disabled = false;
             }
         });

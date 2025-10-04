@@ -18,7 +18,7 @@
     <header class="header sticky">
       <nav class="nav container">
         <a href="/" class="logo">
-          <img src="{{ url_for('static', filename='images/logo_glass.png') }}" alt="Грант-Консалтинг" class="logo-image" />
+          <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Грант-Консалтинг" class="logo-image" />
         </a>
         <div class="nav__menu" id="nav-menu">
           <ul class="nav__list">
@@ -47,69 +47,6 @@
     <main>
         {% block content %}{% endblock %}
     </main>
-
-    <!-- Квиз-форма (Pop-up) -->
-    <div class="quiz-overlay" id="quiz-overlay">
-        <div class="quiz-modal" id="quiz-modal">
-            <button class="icon-btn quiz-close-btn" id="quiz-close-btn" aria-label="Закрыть квиз">
-                <span class="material-symbols-outlined">close</span>
-            </button>
-            <form id="quizForm">
-                <div class="quiz-step active" data-step="1">
-                    <h3 class="title-large">Узнайте свои шансы на победу!</h3>
-                    <p>Ответьте на 3 вопроса, и мы пришлем вам оценку шансов и чек-лист по подготовке проекта.</p>
-                    <div class="form-group">
-                        <input type="text" id="quizName" name="name" required class="m3-text-field" placeholder=" ">
-                        <label for="quizName">Ваше имя *</label>
-                    </div>
-                    <div class="form-group">
-                        <input type="tel" id="quizPhone" name="phone" required class="m3-text-field" placeholder=" ">
-                        <label for="quizPhone">Телефон / Telegram *</label>
-                    </div>
-                    <button type="button" class="btn btn--primary quiz-next-btn">Далее</button>
-                </div>
-                <div class="quiz-step" data-step="2">
-                    <h3 class="title-large">В какой сфере ваш проект?</h3>
-                    <div class="quiz-options">
-                        <button type="button" class="quiz-option-btn" data-value="IT и нейросети">IT и нейросети</button>
-                        <button type="button" class="quiz-option-btn" data-value="Биотехнологии">Биотехнологии</button>
-                        <button type="button" class="quiz-option-btn" data-value="Инженерия">Инженерия</button>
-                        <button type="button" class="quiz-option-btn" data-value="Образование">Образование</button>
-                        <button type="button" class="quiz-option-btn" data-value="Другое">Другое</button>
-                    </div>
-                    <input type="hidden" name="project_sphere">
-                    <button type="button" class="btn btn--secondary quiz-prev-btn">Назад</button>
-                </div>
-                <div class="quiz-step" data-step="3">
-                    <h3 class="title-large">На какой стадии готовности ваш проект?</h3>
-                     <div class="quiz-options">
-                        <button type="button" class="quiz-option-btn" data-value="Только идея">Только идея</button>
-                        <button type="button" class="quiz-option-btn" data-value="Есть MVP / Прототип">Есть MVP / Прототип</button>
-                        <button type="button" class="quiz-option-btn" data-value="Уже есть первые продажи">Уже есть первые продажи</button>
-                        <button type="button" class="quiz-option-btn" data-value="Другое">Другое</button>
-                    </div>
-                    <input type="hidden" name="project_stage">
-                    <button type="button" class="btn btn--secondary quiz-prev-btn">Назад</button>
-                </div>
-                <div class="quiz-step" data-step="4">
-                    <h3 class="title-large">Последний шаг!</h3>
-                    <p>Оставьте ваш Email, чтобы мы прислали вам результат и бонусный чек-лист.</p>
-                     <div class="form-group">
-                        <input type="email" id="quizEmail" name="email" required class="m3-text-field" placeholder=" ">
-                        <label for="quizEmail">Email *</label>
-                    </div>
-                    <button type="submit" class="btn btn--primary">Получить результат</button>
-                    <button type="button" class="btn btn--secondary quiz-prev-btn">Назад</button>
-                </div>
-            </form>
-            <div class="quiz-step" data-step="thanks">
-                <span class="material-symbols-outlined quiz-thanks-icon">check_circle</span>
-                <h3 class="title-large">Спасибо за заявку!</h3>
-                <p>Мы скоро свяжемся с вами, чтобы обсудить детали и оценить шансы вашего проекта. Результаты и чек-лист уже летят на вашу почту!</p>
-                <button class="btn btn--primary quiz-finish-btn">Закрыть</button>
-            </div>
-        </div>
-    </div>
 
     <!-- Pop-up при уходе с сайта -->
     <div class="exit-overlay" id="exit-overlay">
