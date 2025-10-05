@@ -1,2 +1,10 @@
-ErrorDocument 404 /404.html
-ErrorDocument 500 /404.html
+RewriteEngine On
+
+# Убираем index.html из URL
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.html\ HTTP/
+RewriteRule ^index\.html$ / [R=301,L]
+
+# Обрабатываем запросы к корневой папке
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /index.html [L,QSA]

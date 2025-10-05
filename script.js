@@ -57,20 +57,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Mobile Navigation
     const navMenu = document.getElementById('nav-menu'),
-          navToggle = document.getElementById('nav-toggle'),
-          navClose = document.getElementById('nav-close');
+          navToggle = document.getElementById('nav-toggle');
 
     if(navToggle) {
         navToggle.addEventListener('click', () =>{
-            navMenu.classList.add('show-menu');
+            navMenu.classList.toggle('show-menu');
         });
     }
 
-    if(navClose) {
-        navClose.addEventListener('click', () =>{
-            navMenu.classList.remove('show-menu');
-        });
+    // Close menu when a link is clicked
+    const closeMenu = () => {
+        navMenu.classList.remove('show-menu');
     }
+    const navLinksMobile = document.querySelectorAll('.nav__list .nav-link');
+    navLinksMobile.forEach(link => link.addEventListener('click', closeMenu));
 
     // Expansion Panels (Accordion) for multiple accordions
     const accordions = document.querySelectorAll('.specs-accordion');
@@ -93,137 +93,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
-
-    // --- Функция загрузки новостей ---
-    async function loadNews() {
-        const newsContainer = document.getElementById('news-container');
-        if (!newsContainer) return;
-
-        // Определяем, находимся ли мы на главной странице
-        const isHomePage = document.body.classList.contains('home-page');
-
-        try {
-            // Запрос к файлу news.json
-            const response = await fetch('/news.json'); // Используем абсолютный путь
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            let allNews = await response.json();
-
-            // Функция для рендеринга новостей
-            const renderNews = (newsList) => {
-                newsContainer.innerHTML = ''; // Очистка контейнера
-
-                if (newsList.length === 0) {
-                    newsContainer.innerHTML = '<p style="text-align: center; grid-column: 1 / -1;">Новостей по данному фильтру нет.</p>';
-                    return;
-                }
-
-                // На главной странице показываем только 3 новости
-                const newsToRender = isHomePage ? newsList.slice(0, 3) : newsList;
-
-                if (newsToRender.length === 0 && !isHomePage) {
-                     newsContainer.innerHTML = '<p style="text-align: center; grid-column: 1 / -1;">Новостей пока нет.</p>';
-                     return;
-                }
-
-
-                newsToRender.forEach(news => {
-                    const newsCard = document.createElement('article');
-                    newsCard.className = 'news-card';
-                    // Добавляем обработчик клика на всю карточку
-                    newsCard.addEventListener('click', () => {
-                        window.location.href = `/news/${news.slug}/`;
-                    });
-
-                    // Форматирование даты
-                    const date = new Date(news.date);
-                    const formattedDate = date.toLocaleDateString('ru-RU', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                    });
-
-                    // Создаем HTML для тегов, если они есть
-                    let tagsHTML = '';
-                    if (news.tags && news.tags.length > 0) {
-                        tagsHTML = news.tags.map(tag => `<span class="chip chip-assist">#${tag}</span>`).join('');
-                    }
-
-                    // Создаем HTML для изображения, если оно есть
-                    let imageHTML = '';
-                    if (news.image) {
-                        imageHTML = `<img src="/uploads/${news.image}" alt="${news.title}" class="news-card__image">`;
-                    }
-
-                    // Создаем HTML для ссылки на документ, если он есть
-                    let documentHTML = '';
-                    if (news.document) {
-                        const docPath = news.document.startsWith('pdf/') ? news.document : `pdf/${news.document}`;
-                        documentHTML = `<a href="/uploads/${docPath}" class="icon-btn-news ripple-container" download onclick="event.stopPropagation();"><span class="material-symbols-outlined">download</span></a>`;
-                    }
-
-                    // Обрезаем текст до 120 символов
-                    const shortContent = news.content.replace(/<br>/g, ' ').substring(0, 120) + '...';
-                    const primaryTag = news.primary_tag || 'Наука';
-
-                    newsCard.innerHTML = `
-                        <div class="news-card__content-wrapper">
-                            <div class="news-card__header">
-                                <span class="chip chip-category">${primaryTag}</span>
-                                <time class="news-date" datetime="${news.date}">${formattedDate}</time>
-                            </div>
-                            ${imageHTML}
-                            <div class="news-card__content">
-                                <h3 class="news-title"><a href="/news/${news.slug}/">${news.title}</a></h3>
-                                <p class="news-excerpt">${shortContent}</p>
-                            </div>
-                            <hr class="divider">
-                            <div class="news-card__footer">
-                                <div class="news-tags">
-                                    ${tagsHTML}
-                                </div>
-                                <div class="news-actions">
-                                    ${documentHTML}
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    newsContainer.appendChild(newsCard);
-                });
-                 // Добавляем Ripple-эффект ко всем кнопкам после их создания
-                addRippleEffect();
-            };
-
-            // Изначальный рендер всех (или 3-х) новостей
-            renderNews(allNews);
-
-            // --- Логика фильтрации ---
-            const filterChips = document.querySelectorAll('.filter-chip');
-            filterChips.forEach(chip => {
-                chip.addEventListener('click', () => {
-                    // Управление активным состоянием кнопок
-                    filterChips.forEach(c => c.classList.remove('active'));
-                    chip.classList.add('active');
-
-                    const filter = chip.dataset.filter;
-                    if (filter === 'all') {
-                        renderNews(allNews);
-                    } else {
-                        const filteredNews = allNews.filter(news => (news.primary_tag || '').toLowerCase() === filter.toLowerCase());
-                        renderNews(filteredNews);
-                    }
-                });
-            });
-
-        } catch (error) {
-            console.error('Ошибка при загрузке новостей:', error);
-            newsContainer.innerHTML = '<p style="text-align: center; grid-column: 1 / -1;">Не удалось загрузить новости. Попробуйте позже.</p>';
-        }
-    }
-
-    // Запускаем загрузку новостей
-    loadNews();
 
     // --- Функция для Ripple-эффекта ---
     function addRippleEffect() {
@@ -258,6 +127,35 @@ document.addEventListener('DOMContentLoaded', () => {
     // Применяем эффект к кнопкам, которые уже есть на странице
     addRippleEffect();
 
+    // --- Глобальная функция отправки данных в Make.com ---
+    async function sendToMake(data) {
+        // !!! ЗАМЕНИТЕ ЭТОТ URL НА ВАШ WEBHOOK ИЗ MAKE.COM !!!
+        const MAKE_WEBHOOK_URL = 'https://hook.eu2.make.com/nqtjwvfgxep3pcaasdbonzwsbw7s8f6r'; 
+        
+        try {
+            await fetch(MAKE_WEBHOOK_URL, {
+                method: 'POST',
+                mode: 'no-cors', // Оставляем этот режим для обхода CORS
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+
+            // В режиме 'no-cors' мы не можем проверить успешность ответа от сервера.
+            // Мы предполагаем, что запрос был отправлен, и показываем пользователю сообщение об успехе.
+            // Для отладки проверяйте историю выполнения сценария в Make.com.
+            console.log('Данные отправлены в Make.com. Проверьте историю сценария для подтверждения.');
+            return { success: true, message: 'Заявка успешно отправлена!' };
+
+        } catch (error) {
+            // Этот блок сработает только при ошибках сети (например, если нет интернета).
+            console.error('Fetch error:', error);
+            return { success: false, error: 'Ошибка сети. Не удалось отправить данные.' };
+        }
+    }
+
+
     // --- Обработка формы обратной связи ---
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
@@ -267,51 +165,33 @@ document.addEventListener('DOMContentLoaded', () => {
             const submitBtn = contactForm.querySelector('button[type="submit"]');
             const originalText = submitBtn.textContent;
             
-            // Показываем состояние загрузки
             submitBtn.textContent = 'Отправка...';
             submitBtn.disabled = true;
             
-            try {
-                const formData = new FormData(contactForm);
-                const data = {
-                    name: formData.get('name'),
-                    email: formData.get('email'),
-                    message: formData.get('message')
-                };
-                
-                const response = await fetch('/api/contact', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data)
-                });
-                
-                const result = await response.json();
-                
-                if (result.success) {
-                    // Показываем успешное сообщение
-                    showNotification(result.message, 'success');
-                    contactForm.reset();
-                } else {
-                    // Показываем ошибку
-                    showNotification(result.error || 'Произошла ошибка при отправке', 'error');
-                }
-                
-            } catch (error) {
-                console.error('Ошибка:', error);
-                showNotification('Произошла ошибка при отправке сообщения', 'error');
-            } finally {
-                // Восстанавливаем кнопку
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
+            const formData = new FormData(contactForm);
+            const data = {
+                type: 'Заявка на консультацию',
+                name: formData.get('name'),
+                phone: formData.get('phone'),
+                email: formData.get('email')
+            };
+            
+            const result = await sendToMake(data);
+            
+            if (result.success) {
+                showNotification('Спасибо! Мы скоро с вами свяжемся.', 'success');
+                contactForm.reset();
+            } else {
+                showNotification(result.error, 'error');
             }
+            
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
         });
     }
 
     // --- Функция для показа уведомлений ---
     function showNotification(message, type = 'info') {
-        // Удаляем существующие уведомления
         const existingNotifications = document.querySelectorAll('.notification');
         existingNotifications.forEach(notification => notification.remove());
         
@@ -396,34 +276,21 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.textContent = 'Отправка...';
             submitBtn.disabled = true;
 
-            try {
-                const formData = new FormData(exitForm);
-                const data = {
-                    email: formData.get('email'),
-                    type: 'Заявка на гайд (уход с сайта)',
-                    name: 'Пользователь (уход с сайта)' // Добавляем имя по умолчанию
-                };
+            const formData = new FormData(exitForm);
+            const data = {
+                type: 'Заявка на гайд (уход с сайта)',
+                email: formData.get('email'),
+                name: 'Пользователь (уход с сайта)'
+            };
 
-                const response = await fetch('/api/contact', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
+            const result = await sendToMake(data);
 
-                if (response.ok) {
-                    exitForm.parentElement.style.display = 'none';
-                    document.querySelector('.exit-modal-thanks').style.display = 'block';
-                    setTimeout(closeExitPopup, 3000);
-                } else {
-                    const result = await response.json();
-                    showNotification(result.error || 'Ошибка при отправке', 'error');
-                    submitBtn.textContent = 'Скачать гайд';
-                    submitBtn.disabled = false;
-                }
-
-            } catch (error) {
-                console.error('Ошибка при отправке формы ухода:', error);
-                showNotification('Не удалось отправить данные.', 'error');
+            if (result.success) {
+                exitForm.parentElement.style.display = 'none';
+                document.querySelector('.exit-modal-thanks').style.display = 'block';
+                setTimeout(closeExitPopup, 3000);
+            } else {
+                showNotification(result.error || 'Ошибка при отправке', 'error');
                 submitBtn.textContent = 'Скачать гайд';
                 submitBtn.disabled = false;
             }
@@ -485,36 +352,26 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.textContent = 'Отправка...';
             submitBtn.disabled = true;
 
-            try {
-                const formData = new FormData(form);
-                const data = {
-                    name: formData.get('name'),
-                    phone: formData.get('phone'),
-                    email: formData.get('email'),
-                    project_sphere: formData.get('project_sphere'),
-                    project_stage: formData.get('project_stage'),
-                    type: 'Квиз (со страницы)'
-                };
+            const formData = new FormData(form);
+            const data = {
+                type: 'Квиз (со страницы)',
+                name: formData.get('name'),
+                phone: formData.get('phone'),
+                email: formData.get('email'),
+                project_sphere: formData.get('project_sphere'),
+                project_stage: formData.get('project_stage')
+            };
 
-                const response = await fetch('/api/contact', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
+            const result = await sendToMake(data);
 
-                if (response.ok) {
-                    goToStep('thanks');
-                } else {
-                    const result = await response.json();
-                    showNotification(result.error || 'Ошибка при отправке', 'error');
-                }
-            } catch (error) {
-                console.error('Ошибка при отправке квиза:', error);
-                showNotification('Не удалось отправить данные.', 'error');
-            } finally {
-                submitBtn.textContent = 'Получить результат и чек-лист';
-                submitBtn.disabled = false;
+            if (result.success) {
+                goToStep('thanks');
+            } else {
+                showNotification(result.error || 'Ошибка при отправке', 'error');
             }
+           
+            submitBtn.textContent = 'Получить результат и чек-лист';
+            submitBtn.disabled = false;
         });
     }
 });

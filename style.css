@@ -2116,6 +2116,7 @@ section {
     height: 200px;
     object-fit: cover;
     object-position: 0% 30%;
+    border-radius: 16px;
 }
 .case-content {
     padding: 1.5rem;
@@ -2442,5 +2443,152 @@ section {
     .tariffs-section .container,
     .contacts-section .container {
         padding: 1.5rem;
+    }
+}
+
+/*
+ * ===============================================
+ *  Mobile Responsiveness
+ * ===============================================
+ */
+
+@media (max-width: 768px) {
+    /* Typography Adjustments */
+    h1, .display-large {
+        font-size: 2.5rem; /* 40px */
+        line-height: 3rem;
+    }
+
+    h2, .headline-large {
+        font-size: 1.75rem; /* 28px */
+        line-height: 2.25rem;
+    }
+
+    h3, .title-large {
+        font-size: 1.25rem; /* 20px */
+        line-height: 1.625rem;
+    }
+    
+    .headline-small {
+        font-size: 1.25rem; /* 20px */
+        line-height: 1.75rem;
+    }
+
+    p, .body-large {
+        font-size: 0.9375rem; /* 15px */
+    }
+
+    section {
+        padding: 3rem 0;
+    }
+    
+    .container {
+        width: 90%;
+    }
+
+    /* Hero Section */
+    .hero {
+        padding: 4rem 0;
+    }
+
+    .hero__content h1 {
+        font-size: 2.5rem;
+    }
+
+    /* Problems, Cases, Team, Tariffs Grids */
+    .problems-grid,
+    .cases-grid,
+    .team-grid,
+    .tariffs-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Solution Section */
+    .solution-item, 
+    .solution-item:nth-child(even) {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+    }
+    .solution-item .solution-text {
+        order: 2;
+    }
+    .solution-item .solution-icon {
+        order: 1;
+    }
+    
+    /* Team Section */
+    .team-photo {
+        width: 120px;
+        height: 120px;
+    }
+    
+    /* Tariffs Section */
+    .tariff-card.popular {
+        transform: scale(1);
+    }
+    
+    /* Contacts Section */
+    .contacts-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .contacts-info {
+        text-align: center;
+    }
+    
+    .contact-list {
+        align-items: center;
+    }
+
+    .contact-list li {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .contacts-form {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Fine-tune typography for very small screens */
+    h1, .display-large {
+        font-size: 2rem; /* 32px */
+        line-height: 2.5rem;
+    }
+
+    h2, .headline-large {
+        font-size: 1.5rem; /* 24px */
+        line-height: 2rem;
+    }
+
+    h3, .title-large {
+        font-size: 1.125rem; /* 18px */
+        line-height: 1.5rem;
+    }
+    
+    .headline-small {
+        font-size: 1.125rem; /* 18px */
+        line-height: 1.5rem;
+    }
+
+    .section--problems .container,
+    .cases-section .container,
+    .tariffs-section .container,
+    .contacts-section .container {
+        padding: 1.5rem 1rem;
+    }
+    
+    .problem-card, .solution-item, .contacts-form {
+        padding: 1.5rem;
+    }
+    
+    .quiz-container {
+        padding: 1.5rem 1rem;
+    }
+    
+    .case-photo {
+        height: 180px;
     }
 }
